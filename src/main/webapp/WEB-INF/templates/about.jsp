@@ -49,7 +49,7 @@
     <p class="lead">두번재, 가장 가까운 주유소를 찾아줍니다.</p>
     <p class="lead">세번째, 하찮은 데이터를 통한 최적 주유소를 찾아줍니다.</p><br>
     <p class="lead">
-      <a href="#" class="btn btn-lg btn-secondary">Enter</a>
+      <a href="/template" class="btn btn-lg btn-secondary">Enter</a>
     </p>
   </main>
 

@@ -53,7 +53,7 @@
 		  <a class="nav-link" href="#">Map</a>
 		</li>    
 		<li class="nav-item">
-		  <a class="nav-link" href="#">GasStation Info</a>
+		  <a class="nav-link" href="/dashBoard">GasStation Info</a>
 		</li>    
 	</ul>
   </div>  
