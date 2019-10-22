@@ -36,17 +36,17 @@
     <div class="inner">
       <h3 class="masthead-brand">Oil Navigation(가제)</h3>
       <nav class="nav nav-masthead justify-content-center">
-        <a class="nav-link active" href="/">Home</a>
+        <a class="nav-link" href="/">Home</a>
         <a class="nav-link" href="/about">About</a>
-        <a class="nav-link" href="/contact">Contact</a>
+        <a class="nav-link active" href="/contact">Contact</a>
       </nav>
     </div>
   </header>
 
   <main role="main" class="inner cover">
-    <h1 class="cover-heading">Home</h1><br>
-    <p class="lead">좋은 기름 원해요?</p>
-    <p class="lead">가까우면서 저렴한 기름 원해요?</p>
+    <h1 class="cover-heading">Contact</h1><br>
+    <p class="lead">우리는 SSAFY에서 공부중이애오</p>
+    <p class="lead">반가워요</p>
     <p class="lead">그럼 들어와요.</p><br>
     <p class="lead">
       <a href="#" class="btn btn-lg btn-secondary">Enter</a>

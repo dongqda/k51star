@@ -36,18 +36,18 @@
     <div class="inner">
       <h3 class="masthead-brand">Oil Navigation(가제)</h3>
       <nav class="nav nav-masthead justify-content-center">
-        <a class="nav-link active" href="/">Home</a>
-        <a class="nav-link" href="/about">About</a>
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link active" href="/about">About</a>
         <a class="nav-link" href="/contact">Contact</a>
       </nav>
     </div>
   </header>
 
   <main role="main" class="inner cover">
-    <h1 class="cover-heading">Home</h1><br>
-    <p class="lead">좋은 기름 원해요?</p>
-    <p class="lead">가까우면서 저렴한 기름 원해요?</p>
-    <p class="lead">그럼 들어와요.</p><br>
+    <h1 class="cover-heading">About</h1><br>
+    <p class="lead">첫번째, 주변에서 가장 저렴한 주유소를 찾아줍니다.</p>
+    <p class="lead">두번재, 가장 가까운 주유소를 찾아줍니다.</p>
+    <p class="lead">세번째, 하찮은 데이터를 통한 최적 주유소를 찾아줍니다.</p><br>
     <p class="lead">
       <a href="#" class="btn btn-lg btn-secondary">Enter</a>
     </p>
