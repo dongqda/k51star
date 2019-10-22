@@ -14,19 +14,12 @@
 <link rel="stylesheet" href="css/dashBoard.css">
 
 <style type="text/css">
-.bd-placeholder-img {
-	font-size: 1.125rem;
-	text-anchor: middle;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+.임시클래스{
+ border:1px solid black;
 }
 
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
+.navbar{
+	margin-bottom:20px;
 }
 </style>
 </head>
@@ -50,16 +43,26 @@
 		</li>
 		
 		<li class="nav-item">
-		  <a class="nav-link" href="#">Map</a>
+		  <a class="nav-link" href="/map">Map</a>
 		</li>    
 		<li class="nav-item">
-		  <a class="nav-link" href="#">GasStation Info</a>
+		  <a class="nav-link" href="/dashBoard">GasStation Info</a>
 		</li>    
 	</ul>
   </div>  
 </nav>
 
-	<div id="map" style="width: 80%; height: 500px;"></div>
+	<div class="container">
+	    <div class="row">
+	        <div class="col-md-6 임시클래스">가격순 top10,거리순 top10, 최적순 top10</div>
+	        <div class="col-md-6 임시클래스">주유소 상세정보</div>
+	        <div class="col-xs-12 임시클래스">
+	        	<div id="map" style="width: 100%; min-height: 500px;"></div>
+	        </div>
+	    </div>
+	</div>
+	
+	
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8d47821d08c14a3b647e14eafa6ab215&libraries=services"></script>
 	<script>
