@@ -18,14 +18,21 @@ public class RootController {
     RootService service;
 	
 	@RequestMapping(value = "/")
-	public String index(Model model) {
-		model.addAttribute("testMessage","Hello world!");
+	public String index() {
 		return "index";
 	}
 	
-	@RequestMapping("/admin")
-	public void admin() {}
+	@RequestMapping("/about")
+	public void about() {}
 	
+	@RequestMapping("/contact")
+	public void contact() {}
+	
+	@RequestMapping("/template")
+	public void template() {}
+	
+	@RequestMapping("/dashBoard")
+	public void dashBoard() {}
 	
 	@RequestMapping("/login")
 	public void login() {}
