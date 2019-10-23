@@ -56,7 +56,7 @@
 <div class="container">
     <div class="row"></div>
     <div class="row">
-        <div class="col-md-4 임시클래스">전국 주유소 평균</div>
+        <div class="col-md-4 임시클래스" id="avgprice">전국 주유소 평균</div>
         <div class="col-md-4 임시클래스">최근 7일 전국 일일 평균가</div>
         <div class="col-md-4 임시클래스">최근 1주간 주간 평균가</div>
         <div class="col-md-6 임시클래스">시도별 주유소 평균가격(현재)</div>
@@ -67,6 +67,41 @@
         <div class="col-md-6 임시클래스">주유소 상세정보</div>
     </div>
 </div>
+  <script type="text/javascript">
+  var data = {};
+  $(document).ready(function(){
+	    loadData();
+	});
+	
+	function loadData()
+	{	
+	    $.ajax({
+	        crossOrigin: true,
+	        url: "http://www.opinet.co.kr/api/avgAllPrice.do?out=json&code=F632191018",
+	 		dataType:"JSON",
+	        success: function(data) {
+	          console.log(JSON.parse(data));
+	        }
+	      });
+
+// 	    $.ajax({
+// 	    url : "http://www.opinet.co.kr/api/avgAllPrice.do?out=json&code=F632191018"
+// 		,crossDomain: true
+// 		,type: 'GET'
+// 		,dataType:"JSON"
+// 		})
+//         .done(function(msg) {
+//           //console.log(msg);
+// 			console.log(msg.RESULT.OIL);
+// //     	    document.getElementById('avgprice').innerHTML +="<br>"+ msg;
+//         })
+//         .fail(function() {
+//           alert("fail");
+//         });
+	}
+
+  </script>
+
 
 </body>
 </html>
