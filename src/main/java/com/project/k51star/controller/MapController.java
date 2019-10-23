@@ -9,6 +9,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MapController {
 	
 	@RequestMapping(value = "/map")
-	public void map(Model model) {}
-
+	public void map() {}
 }
