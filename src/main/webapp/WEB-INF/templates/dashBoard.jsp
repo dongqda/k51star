@@ -41,11 +41,47 @@
 	    </div>
 	</div>
 </div>
-<script>
-	var menu = document.getElementById("menu");
+
+
+
+    <script>
+    	var menu = document.getElementById("menu");
+    	menu.className="nav-link dropdown-toggle active";
+    </script>
+  <script type="text/javascript">
+  var data = {};
+  $(document).ready(function(){
+	    loadData();
+	});
 	
-	menu.className="nav-link dropdown-toggle active";
-</script>
+	function loadData()
+	{	
+	    $.ajax({
+	        crossOrigin: true,
+	        url: "http://www.opinet.co.kr/api/avgAllPrice.do?out=json&code=F632191018",
+	 		dataType:"JSON",
+	        success: function(data) {
+	          console.log(JSON.parse(data));
+	        }
+	      });
+
+// 	    $.ajax({
+// 	    url : "http://www.opinet.co.kr/api/avgAllPrice.do?out=json&code=F632191018"
+// 		,crossDomain: true
+// 		,type: 'GET'
+// 		,dataType:"JSON"
+// 		})
+//         .done(function(msg) {
+//           //console.log(msg);
+// 			console.log(msg.RESULT.OIL);
+// //     	    document.getElementById('avgprice').innerHTML +="<br>"+ msg;
+//         })
+//         .fail(function() {
+//           alert("fail");
+//         });
+	}
+
+  </script>
 
 </body>
 </html>
