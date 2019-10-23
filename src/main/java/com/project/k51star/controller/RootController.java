@@ -5,9 +5,10 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.k51star.service.RootService;
 
@@ -38,7 +39,9 @@ public class RootController {
 	public void login() {}
 	
 	@RequestMapping(value="/change/code", method=RequestMethod.GET)
-	public String change(@Validated String area_name) {
-		return service.areaCode(area_name);
+	@ResponseBody
+	public String change(@PathVariable String area_name, Model model) {
+		String area_code = service.areaCode(area_name);
+		return area_code;
 	}
 }

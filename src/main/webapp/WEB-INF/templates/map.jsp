@@ -54,7 +54,7 @@
 		</li>    
 		<li class="nav-item">
 		  <a class="nav-link" href="#">GasStation Info</a>
-		</li>    
+		</li>
 	</ul>
   </div>  
 </nav>
@@ -102,17 +102,18 @@
 				      data: {'area_name': area_name }, //HTTP 요청과 함께 서버로 보낼 데이터 
 				      method: "GET", //HTTP 요청 메소드
 				      sucess:function(res){
-				    	  console.log(res)
+				    	  console.log(res);
 				      },
-				      error:function(err){
-				    	  console.log(err);
+				      error:function(res){
+				    	  console.log(res);
 				      }
-				    })
-				    
+					}).done(function(data){
+						console.log(${area_code});
+					})
 				}
-			});
-		 });
-		}
+		 	});
+		});
+	}
 </script>
 
 </body>
