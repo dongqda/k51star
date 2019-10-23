@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags"%>
 <layoutTag:layout>
-<!DOCTYPE html>
-<html>
+	<!DOCTYPE html>
+	<html>
 <head>
 <title>Oil Navigation(가제)</title>
 <meta charset="UTF-8">
@@ -13,54 +13,32 @@
 
 <link rel="stylesheet" href="css/main.css">
 
-<style type="text/css">
-.bd-placeholder-img {
-	font-size: 1.125rem;
-	text-anchor: middle;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
-
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
-}
-</style>
 </head>
 <body class="text-center">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-  <header class="masthead mb-auto">
-    <div class="inner">
-      <h3 class="masthead-brand">Oil Navigation(가제)</h3>
-      <nav class="nav nav-masthead justify-content-center">
-        <a class="nav-link" href="/">Home</a>
-        <a class="nav-link" href="/about">About</a>
-        <a class="nav-link active" href="/contact">Contact</a>
-      </nav>
-    </div>
-  </header>
+	<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+		<jsp:include page="header.jsp"></jsp:include>
 
-  <main role="main" class="inner cover">
-    <h1 class="cover-heading">Contact</h1><br>
-    <p class="lead">우리는 SSAFY에서 공부중이애오</p>
-    <p class="lead">반가워요</p>
-    <p class="lead">그럼 들어와요.</p><br>
-    <p class="lead">
-      <a href="/template" class="btn btn-lg btn-secondary">Enter</a>
-    </p>
-  </main>
+		<main role="main" class="inner cover">
+		<h1 class="cover-heading">Contact</h1>
+		<br>
+		<p class="lead">dongq 010-9800-7755</p>
+		<p class="lead">garden 010-4324-5468</p>
+		<p class="lead">beomhyun 010-5324-3239</p>
+		<br>
+		<p class="lead">
+			<a href="/map" class="btn btn-lg btn-secondary">Enter</a>
+		</p>
+		</main>
 
-  <footer class="mastfoot mt-auto">
-    <div class="inner">
-      <p>dongq jungwon beomhyun</a>.</p>
-    </div>
-  </footer>
-</div>
+		<jsp:include page="footer.jsp"></jsp:include>
+	</div>
 
+<script>
+	var contact = document.getElementById("contact");
+	
+	contact.className="nav-link active";
+</script>
 
 </body>
-</html>
+	</html>
 </layoutTag:layout>
