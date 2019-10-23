@@ -28,10 +28,10 @@
 	        <div class="col-md-6 임시클래스">가격순 top10,거리순 top10, 최적순 top10</div>
 	        <div class="col-md-6 임시클래스">주유소 상세정보</div>
 	        <div id="map" class="col-md-12 임시클래스" style="min-height:500px"></div>
-	        <div id="result">asdfasdfa</div>
+	        <div id="result">result</div>
 	    </div>
 	</div>
-
+</div>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8d47821d08c14a3b647e14eafa6ab215&libraries=services"></script>
 	<script  type="text/javascript">

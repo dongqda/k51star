@@ -39,7 +39,6 @@ public class RootController {
 	@ResponseBody
 	public String change(@Validated String area_name) {
 		String area_code = service.areaCode(area_name);
-		System.out.println("controller "+area_code);
 		return area_code;
 	}
 }
