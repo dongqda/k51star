@@ -65,20 +65,6 @@
 	        }
 	      });
 
-// 	    $.ajax({
-// 	    url : "http://www.opinet.co.kr/api/avgAllPrice.do?out=json&code=F632191018"
-// 		,crossDomain: true
-// 		,type: 'GET'
-// 		,dataType:"JSON"
-// 		})
-//         .done(function(msg) {
-//           //console.log(msg);
-// 			console.log(msg.RESULT.OIL);
-// //     	    document.getElementById('avgprice').innerHTML +="<br>"+ msg;
-//         })
-//         .fail(function() {
-//           alert("fail");
-//         });
 	}
 
   </script>
