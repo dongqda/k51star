@@ -56,8 +56,7 @@
 	    <div class="row">
 	        <div class="col-md-6 임시클래스">가격순 top10,거리순 top10, 최적순 top10</div>
 	        <div class="col-md-6 임시클래스">주유소 상세정보</div>
-	        <div class="col-xs-12 임시클래스">
-	        	<div id="map" style="width: 100%; min-height: 500px;"></div>
+	        <div id="map" class="col-md-12 임시클래스" style="min-height:500px">
 	        </div>
 	    </div>
 	</div>
