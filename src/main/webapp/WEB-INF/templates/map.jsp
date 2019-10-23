@@ -48,6 +48,7 @@
 		<li class="nav-item">
 		  <a class="nav-link" href="/dashBoard">GasStation Info</a>
 		</li>    
+		
 	</ul>
   </div>  
 </nav>
@@ -56,16 +57,19 @@
 	    <div class="row">
 	        <div class="col-md-6 임시클래스">가격순 top10,거리순 top10, 최적순 top10</div>
 	        <div class="col-md-6 임시클래스">주유소 상세정보</div>
-	        <div id="map" class="col-md-12 임시클래스" style="min-height:500px">
-	        </div>
+	        <div id="map" class="col-md-12 임시클래스" style="min-height:500px"></div>
+	        <div id="result">asdfasdfa</div>
 	    </div>
 	</div>
-	
-	
+
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8d47821d08c14a3b647e14eafa6ab215&libraries=services"></script>
-	<script>
-		 var container = document.getElementById('map');
+	<script  type="text/javascript">
+	$(document).ready(function(){
+		ready();			
+	});
+	function ready(){
+		var container = document.getElementById('map');
 		 if(navigator.geolocation){
 			navigator.geolocation.getCurrentPosition(function(position) {
 			var x = position.coords.latitude;
@@ -102,19 +106,25 @@
 				      url: "/change/code", // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
 				      contentType: "application/json; charset=utf-8", 
 				      data: {'area_name': area_name }, //HTTP 요청과 함께 서버로 보낼 데이터 
-				      method: "GET", //HTTP 요청 메소드
-				      sucess:function(res){
-				    	  console.log(res);
-				      },
-				      error:function(res){
-				    	  console.log(res);
-				      }
-					}).done(function(data){
-						console.log(${area_code});
+				      method: "GET" //HTTP 요청 메소드
 					})
+					.done(function(res){
+						console.log(res);
+						var area_code = res;
+						$.ajax({
+							url: "http://www.opinet.co.kr/api/lowTop10.do?out=json&code=F632191018&prodcd=B027&area="+area_code,
+				            crossOrigin: true,  
+				            dataType : "json",
+						})
+						.done(function(data){
+							var result = JSON.parse(data);
+							console.log(result);
+						});
+					});
 				}
 		 	});
-		});
+			});
+		}	
 	}
 </script>
 
