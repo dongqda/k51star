@@ -49,7 +49,7 @@
     <p class="lead">가까우면서 저렴한 기름 원해요?</p>
     <p class="lead">그럼 들어와요.</p><br>
     <p class="lead">
-      <a href="#" class="btn btn-lg btn-secondary">Enter</a>
+      <a href="/template" class="btn btn-lg btn-secondary">Enter</a>
     </p>
   </main>
 
