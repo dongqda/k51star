@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <layoutTag:layout>
 <!DOCTYPE html>
 <html>
@@ -9,44 +10,9 @@
 <title>Demo</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-<link rel="stylesheet" href="css/dashBoard.css">
-
-<style type="text/css">
-.navbar{
-	margin-bottom:20px;
-}
-</style>
 </head>
  <body>
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-  <a class="navbar-brand" href="#">Oil Navigation(가제)</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="collapsibleNavbar">
-   <ul class="navbar-nav">
-		<li class="nav-item dropdown">
-		  <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-		    Back To Home
-		  </a>
-		  <div class="dropdown-menu">
-		    <a class="dropdown-item" href="/">Home</a>
-		    <a class="dropdown-item" href="/about">About</a>
-		    <a class="dropdown-item" href="/contact">Contact</a>
-		  </div>
-		</li>
-		
-		<li class="nav-item">
-		  <a class="nav-link" href="/map">Map</a>
-		</li>    
-		<li class="nav-item">
-		  <a class="nav-link" href="/dashBoard">GasStation Info</a>
-		</li>    
-	</ul>
-  </div>  
-</nav>
+<jsp:include page="navbar.jsp"></jsp:include>
 </body>
 </html>
 </layoutTag:layout>

@@ -9,10 +9,7 @@
 <title>Demo</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-<link rel="stylesheet" href="css/dashBoard.css">
-
+<link rel="stylesheet" href="css/main.css">
 <style type="text/css">
 .임시클래스{
  border:1px solid black;
@@ -23,36 +20,9 @@
 }
 </style>
 </head>
- <body>
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-  <a class="navbar-brand" href="#">Oil Navigation(가제)</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="collapsibleNavbar">
-   <ul class="navbar-nav">
-		<li class="nav-item dropdown">
-		  <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-		    Back To Home
-		  </a>
-		  <div class="dropdown-menu">
-		    <a class="dropdown-item" href="/">Home</a>
-		    <a class="dropdown-item" href="/about">About</a>
-		    <a class="dropdown-item" href="/contact">Contact</a>
-		  </div>
-		</li>
-		
-		<li class="nav-item">
-		  <a class="nav-link" href="/map">Map</a>
-		</li>    
-		<li class="nav-item">
-		  <a class="nav-link" href="/dashBoard">GasStation Info</a>
-		</li>    
-		
-	</ul>
-  </div>  
-</nav>
-
+<body class="text-center">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+	<jsp:include page="header.jsp"></jsp:include>
 	<div class="container">
 	    <div class="row">
 	        <div class="col-md-6 임시클래스">가격순 top10,거리순 top10, 최적순 top10</div>
@@ -79,22 +49,22 @@
 		           level: 4 //지도의 레벨(확대, 축소 정도)
 		        };
 
-		    var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-		    // 마커가 표시될 위치입니다
-		    var icon = new kakao.maps.MarkerImage(
-		              "https://image.flaticon.com/icons/svg/106/106128.svg",
-		              new kakao.maps.Size(31,35),
-		              new kakao.maps.Point(13,34)
-		    );
+	    var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+	    // 마커가 표시될 위치입니다
+	    var icon = new kakao.maps.MarkerImage(
+	              "https://image.flaticon.com/icons/svg/106/106128.svg",
+	              new kakao.maps.Size(31,35),
+	              new kakao.maps.Point(13,34)
+	    );
 
-		    var markerPosition  = new kakao.maps.LatLng(x, y);
+	    var markerPosition  = new kakao.maps.LatLng(x, y);
 
-		    // 마커를 생성한 후 마커가 지도 위에 표시되도록 설정합니다
-		   	new kakao.maps.Marker({
-		              position: markerPosition,
-		              image: icon
-		              }).setMap(map);
-		    var geocoder = new kakao.maps.services.Geocoder();
+	    // 마커를 생성한 후 마커가 지도 위에 표시되도록 설정합니다
+	   	new kakao.maps.Marker({
+	              position: markerPosition,
+	              image: icon
+	              }).setMap(map);
+	    var geocoder = new kakao.maps.services.Geocoder();
 
 		    var coord = new kakao.maps.LatLng(x, y);
 		    
