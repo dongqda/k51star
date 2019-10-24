@@ -15,10 +15,13 @@
 	  	</select>
 		<input type="text" id="search" name="searchCar"/>
 	</div>
+	<div>----선택한 리스트---</div>
+	<div id="selectList"></div>
 	<div>----리스트----</div>
 	<div id="carList"></div>
 <script type="text/javascript">
 	var carList=[];
+	var selectList=[];
 	var oldVal="";
 
   	$(document).ready(function(){
@@ -41,18 +44,9 @@
   	$("#feulList").on("propertychange change", function(){
   		var fuel = $("select[name=fuel]").val();
 		if(fuel=="default"){
-			if(oldVal != ""){
-				console.log("default고 oldVal이 있음.")
-			}else{
-				console.log("default고 oldVal이 없음.")
-			}
-		}else {
-			if(oldVal != ""){
-				console.log("default가 아니고 oldVal이 있음.")
-			}else{
-				console.log("default가 아니고 oldVal이 없음.")
-			}
+			fuel="";
 		}
+		search(fuel,oldVal);
   	})
   
   	$("#search").on("propertychange keyup paste input", function() {
@@ -65,32 +59,77 @@
 	    oldVal = currentVal;
 	    
 	    if(fuel=="default"){
-			if(oldVal != ""){
-				console.log("default고 oldVal이 있음.")
-			}else{
-				console.log("default고 oldVal이 없음.")
-			}
-		}else {
-			if(oldVal != ""){
-				console.log("default가 아니고 oldVal이 있음.")
-			}else{
-				console.log("default가 아니고 oldVal이 없음.")
-			}
+			fuel="";
 		}
+	    search(fuel,oldVal);
 	});
+  	
 
   	function listshow(){
 	  var list = document.getElementById("carList");
-	  
+	  var slist = document.getElementById("selectList");
+	  list.innerHTML="";
+	  slist.innerHTML="";
 	  for (var i in carList) {
 		  var line = document.createElement("p");
-		  var el_name = document.createElement("span");
+		  var el_name = document.createElement("a");
+		  el_name.setAttribute("href","#")
+		  el_name.setAttribute("style","text-decoration:none")
+		  el_name.setAttribute("onclick","listClick(this)")
+		  el_name.setAttribute("id",carList[i].car_id);
+		  el_name.setAttribute("title",carList[i].manufacturer);
 		  el_name.innerText=carList[i].car_model;
 		  line.appendChild(el_name);
 		  list.appendChild(line);
       }
+	  for (var i in selectList) {
+		  var line = document.createElement("p");
+		  var el_name = document.createElement("a");
+// 		  el_name.setAttribute("href","#")
+// 		  el_name.setAttribute("style","text-decoration:none")
+// 		  el_name.setAttribute("onclick","listClick(this)")
+		  el_name.setAttribute("id",selectList[i].car_id);
+		  el_name.setAttribute("title",selectList[i].manufacturer);
+		  el_name.innerText=selectList[i].car_model;
+		  line.appendChild(el_name);
+		  slist.appendChild(line);
+      }
   	}
-	 
+  	
+  	function listClick(a){
+  		var index = carList.findIndex(function(item, i){
+  			if(item.car_id == a.id){
+  				selectList.push(item);
+  			    index = i;
+  			    return i;
+  			  }
+		});
+  		if (index !== undefined) carList.splice(index, 1);
+  		listshow();
+  	}
+  	
+  	function search(fuel, car_model){
+  		if(fuel==""&&car_model==""){
+  			carList=[];
+  			document.getElementById("carList").innerHTML="";
+  		}else{
+  			$.ajax({
+  				url:'/car/search',
+  		    	contentType: "application/json; charset=utf-8", 
+  			    data: {
+  			    	'fuel': fuel,
+  			    	'car_model': car_model,
+  			    	}, //HTTP 요청과 함께 서버로 보낼 데이터 
+  			    method: "GET",
+  			    dataType: "json",
+  			})
+  			.done(function(res){
+  				console.log(res);
+  				carList=res;
+  				listshow();
+  			})
+  		}
+  	} 
   </script>
 </body>
 </html>

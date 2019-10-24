@@ -1,6 +1,8 @@
 package com.project.k51star.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -30,15 +32,13 @@ public class CarController {
 	
 	@RequestMapping(value = "/car/search")
 	@ResponseBody
-	public List<CarInfoDto> searchByModel(@Validated String car_model) {
-		List<CarInfoDto> carList = service.searchByModel(car_model);
+	public List<CarInfoDto> searchByModel(@Validated String fuel, @Validated String car_model) {
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("fuel", fuel);
+		map.put("car_model",car_model);
+		
+		List<CarInfoDto> carList = service.searchModel(map);
 		return carList;
 	}
 	
-	@RequestMapping(value = "/car/search/fuel")
-	@ResponseBody
-	public List<CarInfoDto> searchByfuel(@Validated String fuel) {
-		List<CarInfoDto> carList = service.searchByfuel(fuel);
-		return carList;
-	}
 }
