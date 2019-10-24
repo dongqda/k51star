@@ -5,13 +5,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.project.k51star.mapper.MemberMapper">
 
-	<select id="selectMember" resultType="com.project.k51star.dto.Account" parameterType="java.lang.String">
-		SELECT 
-			*
-		FROM 
-			ACCOUNT
+	<select id="selectMember"
+		resultType="com.project.k51star.dto.Account"
+		parameterType="java.lang.String">
+		SELECT
+		*
+		FROM
+		ACCOUNT
 		WHERE
-			EMAIL=#{email}
+		EMAIL=#{email}
 	</select>
 
+	<update id="updateMember" parameterType="com.project.k51star.dto.Account">
+		UPDATE ACCOUNT 
+		SET 
+		NAME=#{name}
+		,PASSWORD=#{password}
+		WHERE
+		EMAIL= #{email} ;
+	</update>
+
+	<delete id="deleteMember" parameterType="java.lang.String">
+		DELETE FROM ACCOUNT
+		WHERE 
+		EMAIL=#{email};
+	</delete>
 </mapper>
