@@ -43,6 +43,7 @@
 		if(fuel=="default"){
 			if(oldVal != ""){
 				console.log("default고 oldVal이 있음.")
+				fuel="";
 			}else{
 				console.log("default고 oldVal이 없음.")
 			}
