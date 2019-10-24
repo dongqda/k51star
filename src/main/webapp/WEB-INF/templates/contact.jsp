@@ -6,7 +6,7 @@
 	<!DOCTYPE html>
 	<html>
 <head>
-<title>Oil Navigation(가제)</title>
+<title>OIL ODI</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -20,14 +20,25 @@
 
 		<main role="main" class="inner cover">
 		<h1 class="cover-heading">Contact</h1>
-		<br>
-		<p class="lead">dongq 010-9800-7755</p>
-		<p class="lead">garden 010-4324-5468</p>
-		<p class="lead">beomhyun 010-5324-3239</p>
-		<br>
-		<p class="lead">
-			<a href="/map" class="btn btn-lg btn-secondary">Enter</a>
-		</p>
+		<div class="container">
+			<form class="form-signin" method="post" action="/mailSending">
+				<div align="center"><!-- 받는 사람 이메일 -->
+					<input type="hidden" name="tomail" size="120" style="width:100%" placeholder="상대의 이메일" class="form-control" value="dglee012@naver.com" >
+				</div>     
+				<div align="center"><!-- 제목 -->
+					<input type="text" name="title" size="120" style="width:100%" placeholder="제목을 입력해주세요" class="form-control" >
+				</div>
+				<p>
+					<div align="center"><!-- 내용 --> 
+						<textarea name="content" cols="100" rows="12" style="width:100%; resize:none" placeholder="문의사항" class="form-control"></textarea>
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+					</div>
+				<p>
+				<div align="center">
+					<input type="submit" value="메일 보내기" class="btn btn-lg btn-secondary">
+				</div>
+			</form>
+		</div>
 		</main>
 
 		<jsp:include page="footer.jsp"></jsp:include>

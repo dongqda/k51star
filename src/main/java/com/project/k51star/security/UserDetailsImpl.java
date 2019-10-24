@@ -13,8 +13,13 @@ import com.project.k51star.dto.Account;
 // 기선님의 아무고나 소스 참조함.
 public class UserDetailsImpl extends User {
 	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
-	public String getNick() { return name;}
+	public String getName() { return name;}
 	public void setName(String name) {this.name = name; }
 	
 	public UserDetailsImpl(Account account) {
