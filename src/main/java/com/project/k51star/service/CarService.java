@@ -14,11 +14,15 @@ public class CarService {
 	@Resource(name = "com.project.k51star.mapper.CarMapper")
     CarMapper mapper;
 	
+	public List<String> categoryFuel(){
+		return mapper.categoryFuel();
+	}
+	
 	public List<CarInfoDto> searchByModel(String car_model) {
 		return mapper.searchByModel(car_model);
 	}
 	
-	public List<String> categoryFuel(){
-		return mapper.categoryFuel();
+	public List<CarInfoDto> searchByfuel(String fuel){
+		return mapper.searchByfuel(fuel);
 	}
 }
