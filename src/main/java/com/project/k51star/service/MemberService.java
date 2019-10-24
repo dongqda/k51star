@@ -15,4 +15,10 @@ public class MemberService {
     public Account selectMember(String email){
         return memberMapper.selectMember(email);
     }
+    public void updateMember(Account account){
+    	memberMapper.updateMember(account);
+    }
+    public void deleteMember(String email){
+    	memberMapper.deleteMember(email);
+    }
 }

@@ -18,11 +18,11 @@
 			<img class="mb-4" src="https://image.flaticon.com/icons/svg/1476/1476715.svg" alt="" width="72" height="72">
 			<h1 class="h3 mb-3 font-weight-normal">Please Sign Up</h1>
 			<label for="inputEmail" class="sr-only">Email address</label>
-			<input type="email" id="inputEmail" class="form-control" placeholder="Email address" autofocus="autofocus" name="email" >
+			<input type="email" id="inputEmail" class="form-control" placeholder="Email address" autofocus="autofocus" name="email" required="required" >
 			<label for="inputEmail" class="sr-only">Email address</label>
-			<input type="text" id="inputName" class="form-control" placeholder="Name" autofocus="autofocus" name="name" >
+			<input type="text" id="inputName" class="form-control" placeholder="Name" autofocus="autofocus" name="name"  required="required">
 			<label for="inputPassword" class="sr-only">Password</label>
-			<input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" >
+			<input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required="required" >
 			<input type="hidden" name="role" value="ROLE_USER" />
 			<div class="checkbox mb-3">
 				<label>

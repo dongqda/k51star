@@ -20,9 +20,9 @@
 		<img class="mb-4" src="https://image.flaticon.com/icons/svg/1476/1476715.svg" alt="" width="72" height="72">
 		<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 		<label for="inputEmail" class="sr-only">Email address</label>
-		<input type="email" id="inputEmail" class="form-control" placeholder="Email address" autofocus="autofocus" name="username" >
+		<input type="email" id="inputEmail" class="form-control" placeholder="Email address" autofocus="autofocus" name="username" required="required">
 		<label for="inputPassword" class="sr-only">Password</label>
-		<input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" >
+		<input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required="required">
 		<sec:csrfInput />
 		<div class="checkbox mb-3">
 			<label>

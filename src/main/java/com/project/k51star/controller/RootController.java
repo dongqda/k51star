@@ -33,6 +33,9 @@ public class RootController {
 	@RequestMapping("/dashBoard")
 	public void dashBoard() {}
 	
+	@RequestMapping("/deleteMessage")
+	public void deleteMessage() {}
+	
 	
 	@RequestMapping(value="/change/code", method=RequestMethod.GET)
 	@ResponseBody
