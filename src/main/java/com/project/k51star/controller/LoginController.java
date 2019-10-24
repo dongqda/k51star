@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.k51star.dto.Account;
+import com.project.k51star.security.AccountRepository;
 import com.project.k51star.security.UserDetailsImpl;
-import com.project.k51star.service.AccountRepository;
 
 @Controller
 public class LoginController {

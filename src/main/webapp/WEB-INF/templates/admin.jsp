@@ -7,12 +7,11 @@
 <title> Happy WOrld </title>
 </head>
 <body>
-<jsp:include page="navbar.jsp"></jsp:include>
 admin 입니다.
 
 
 <sec:authentication property="principal.username"/>님 안녕하세요 !<br>
-<sec:authentication property="principal.nick"/>님 안녕하세요 !<br>
+<sec:authentication property="principal.name"/>님 안녕하세요 !<br>
 
 
 

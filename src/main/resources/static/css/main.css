@@ -16,6 +16,9 @@ a:hover {
   border: .05rem solid #fff;
 }
 
+input[type="text"],[type="email"],[type="password"]{
+  margin-bottom:10px;
+}
 
 /*
  * Base structure

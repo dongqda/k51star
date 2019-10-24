@@ -3,8 +3,6 @@ package com.project.k51star.controller;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,11 +27,12 @@ public class RootController {
 	@RequestMapping("/contact")
 	public void contact() {}
 	
-	@RequestMapping("/template")
-	public void template() {}
+	@RequestMapping("/chart")
+	public void chart() {}
 	
 	@RequestMapping("/dashBoard")
 	public void dashBoard() {}
+	
 	
 	@RequestMapping(value="/change/code", method=RequestMethod.GET)
 	@ResponseBody

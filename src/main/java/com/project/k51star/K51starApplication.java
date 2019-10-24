@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.project.k51star.dto.Account;
-import com.project.k51star.service.AccountRepository;
+import com.project.k51star.security.AccountRepository;
 
 @SpringBootApplication
 public class K51starApplication {
