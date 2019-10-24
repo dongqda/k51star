@@ -30,6 +30,9 @@ dependencies {
 	compile('javax.servlet:jstl:1.2')
 	compile('org.apache.tomcat.embed:tomcat-embed-jasper')
 
+	compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+	
+	
 	runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
 	
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {

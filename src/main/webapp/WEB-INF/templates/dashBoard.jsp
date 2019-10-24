@@ -50,21 +50,113 @@
     </script>
   <script type="text/javascript">
   var data = {};
+  var key = "F632191018";
   $(document).ready(function(){
 	    loadData();
 	});
 	
 	function loadData()
 	{	
+		var lowTop10 ={};
 	    $.ajax({
-	        crossOrigin: true,
-	        url: "http://www.opinet.co.kr/api/avgAllPrice.do?out=json&code=F632191018",
-	 		dataType:"JSON",
-	        success: function(data) {
-	          console.log(JSON.parse(data));
-	        }
-	      });
+		      url: "/parsing", // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
+		      contentType: "application/json; charset=utf-8", 
+		      data: {'requesturl': "http://www.opinet.co.kr/api/lowTop10.do?out=json&code="+key+"8&prodcd=B027" }, //HTTP 요청과 함께 서버로 보낼 데이터 
+		      method: "GET" //HTTP 요청 메소드
+		})
+		.done(function(res){
+			lowTop10.gasoline = res.RESULT.OIL;
+		    $.ajax({
+			      url: "/parsing", // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
+			      contentType: "application/json; charset=utf-8", 
+			      data: {'requesturl': "http://www.opinet.co.kr/api/lowTop10.do?out=json&code="+key+"&prodcd=D047" }, //HTTP 요청과 함께 서버로 보낼 데이터 
+			      method: "GET" //HTTP 요청 메소드
+			})
+			.done(function(res){
+				lowTop10.diesel = res.RESULT.OIL;
+			    $.ajax({
+				      url: "/parsing", // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
+				      contentType: "application/json; charset=utf-8", 
+				      data: {'requesturl': "http://www.opinet.co.kr/api/lowTop10.do?out=json&code="+key+"&prodcd=B034" }, //HTTP 요청과 함께 서버로 보낼 데이터 
+				      method: "GET" //HTTP 요청 메소드
+				})
+				.done(function(res){
+					lowTop10.finegasoline = res.RESULT.OIL;
+				    $.ajax({
+					      url: "/parsing", // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
+					      contentType: "application/json; charset=utf-8", 
+					      data: {'requesturl': "http://www.opinet.co.kr/api/lowTop10.do?out=json&code="+key+"&prodcd=K015" }, //HTTP 요청과 함께 서버로 보낼 데이터 
+					      method: "GET" //HTTP 요청 메소드
+					})
+					.done(function(res){
+						lowTop10.lpg = res.RESULT.OIL;
+					    data.lowTop10 = lowTop10;
+					    $.ajax({
+						      url: "/parsing", // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
+						      contentType: "application/json; charset=utf-8", 
+						      data: {'requesturl': "http://www.opinet.co.kr/api/avgLastWeek.do?code="+key+"&out=json" }, //HTTP 요청과 함께 서버로 보낼 데이터 
+						      method: "GET" //HTTP 요청 메소드
+						})
+						.done(function(res){
+							data.avgLastWeek = res.RESULT.OIL;
+							$.ajax({
+							      url: "/parsing", // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
+							      contentType: "application/json; charset=utf-8", 
+							      data: {'requesturl': "http://www.opinet.co.kr/api/avgRecentPrice.do?out=json&code="+key}, //HTTP 요청과 함께 서버로 보낼 데이터 
+							      method: "GET" //HTTP 요청 메소드
+							})
+							.done(function(res){
+								data.sevendays = res.RESULT.OIL;
+								$.ajax({
+								      url: "/parsing", // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
+								      contentType: "application/json; charset=utf-8", 
+								      data: {'requesturl': "http://www.opinet.co.kr/api/avgSidoPrice.do?out=json&code="+key}, //HTTP 요청과 함께 서버로 보낼 데이터 
+								      method: "GET" //HTTP 요청 메소드
+								})
+								.done(function(res){
+									data.sido = res.RESULT.OIL;
+									$.ajax({
+									      url: "/parsing", // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
+									      contentType: "application/json; charset=utf-8", 
+									      data: {'requesturl': "http://www.opinet.co.kr/api/avgSidoPrice.do?out=json&code="+key}, //HTTP 요청과 함께 서버로 보낼 데이터 
+									      method: "GET" //HTTP 요청 메소드
+									})
+									.done(function(res){
+										data.sido = res.RESULT.OIL;
+										//시군구별 일단 PASS API요청횟수 초과날거임
+										http://www.opinet.co.kr/api/avgAllPrice.do?out=xml&code=XXXXXX
+											$.ajax({
+											      url: "/parsing", // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
+											      contentType: "application/json; charset=utf-8", 
+											      data: {'requesturl': "http://www.opinet.co.kr/api/avgSidoPrice.do?out=json&code="+key}, //HTTP 요청과 함께 서버로 보낼 데이터 
+											      method: "GET" //HTTP 요청 메소드
+											})
+											.done(function(res){
+												data.sido = res.RESULT.OIL;
+												//시군구별 일단 PASS API요청횟수 초과날거임
+												
+												$.ajax({
+												      url: "/parsing", // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
+												      contentType: "application/json; charset=utf-8", 
+												      data: {'requesturl': "http://www.opinet.co.kr/api/avgAllPrice.do?out=json&code="+key}, //HTTP 요청과 함께 서버로 보낼 데이터 
+												      method: "GET" //HTTP 요청 메소드
+												})
+												.done(function(res){
+													data.avgprice = res.RESULT.OIL;
+													
+												});	
+											});		
+									});
+								});
+							});
+						});
+					});
+				});
+			});
+		});
 
+	    
+		console.log(data);
 	}
 
   </script>
