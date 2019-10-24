@@ -19,9 +19,19 @@
 			<li class="nav-item">
 				<a id="contact" class="nav-link" href="/contact">Contact</a>
 			</li> 
+			<li class="nav-item">
+				<a id="contact" class="nav-link" href="/userinformation">Userinformation</a>
+			</li> 
 			<li class="nav-item dropdown">
 	        	<a id="menu" class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Menu</a>
 				<div class="dropdown-menu">
+					<sec:authorize access="isAuthenticated()">
+						<form action="/myPage" method="get">
+							<input type="hidden" name="email" value="<sec:authentication property="principal.username"/>">
+							<button type="submit"><a class="dropdown-item" href="#">마이페이지</a></button>
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+						</form>
+					</sec:authorize>
 					<a class="dropdown-item" href="/map">지도</a>
 					<a class="dropdown-item" href="/dashBoard">주유소 정보</a>
 				</div>

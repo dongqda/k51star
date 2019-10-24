@@ -33,6 +33,7 @@ public class RootController {
 	@RequestMapping("/dashBoard")
 	public void dashBoard() {}
 	
+	
 	@RequestMapping(value="/change/code", method=RequestMethod.GET)
 	@ResponseBody
 	public String change(@Validated String area_name) {
