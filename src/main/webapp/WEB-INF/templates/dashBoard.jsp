@@ -64,7 +64,6 @@
 	          console.log(JSON.parse(data));
 	        }
 	      });
-
 	}
 
   </script>
