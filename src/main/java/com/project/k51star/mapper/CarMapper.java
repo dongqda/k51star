@@ -1,6 +1,7 @@
 package com.project.k51star.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +13,6 @@ public interface CarMapper {
 	public List<String> categoryFuel();
 	
 	//모델로 차량 검색
-	public List<CarInfoDto> searchByModel(String car_model);
+	public List<CarInfoDto> searchModel(Map<String, String> map);
 	
-	public List<CarInfoDto> searchByfuel(String fuel);
 }
