@@ -21,21 +21,24 @@ public class CarController {
 	@RequestMapping(value = "/car")
 	public void car() {}
 	
-	@RequestMapping(value = "/car/search")
-	@ResponseBody
-	public List<CarInfoDto> searchByModel(@Validated String car_model) {
-		System.out.println(car_model);
-		List<CarInfoDto> carList = service.searchByModel(car_model);
-		for(int i=0;i<carList.size();i++) {
-			System.out.println(carList.get(i));
-		}
-		return carList;
-	}
-	
 	@RequestMapping(value = "/car/fuel")
 	@ResponseBody
 	public List<String> categoryFuel() {
 		List<String> fuelList = service.categoryFuel();
 		return fuelList;
+	}
+	
+	@RequestMapping(value = "/car/search")
+	@ResponseBody
+	public List<CarInfoDto> searchByModel(@Validated String car_model) {
+		List<CarInfoDto> carList = service.searchByModel(car_model);
+		return carList;
+	}
+	
+	@RequestMapping(value = "/car/search/fuel")
+	@ResponseBody
+	public List<CarInfoDto> searchByfuel(@Validated String fuel) {
+		List<CarInfoDto> carList = service.searchByfuel(fuel);
+		return carList;
 	}
 }

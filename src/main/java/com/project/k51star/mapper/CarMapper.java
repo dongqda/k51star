@@ -9,8 +9,10 @@ import com.project.k51star.dto.CarInfoDto;
 @Repository("com.project.k51star.mapper.CarMapper")
 public interface CarMapper {
 	
+	public List<String> categoryFuel();
+	
 	//모델로 차량 검색
 	public List<CarInfoDto> searchByModel(String car_model);
 	
-	public List<String> categoryFuel();
+	public List<CarInfoDto> searchByfuel(String fuel);
 }

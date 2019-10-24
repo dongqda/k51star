@@ -10,15 +10,18 @@
 </head>
 <body>
 	<div>
-	<div class="dropdown">
-	  <p class="dropbtn">유종의 미</p>
-	  <div id="feulList" class="dropdown-content"></div>
+	  	<select name="fuel" id="feulList">
+	  		<option  value="default" selected>유종의 미</option>
+	  	</select>
+		<input type="text" id="search" name="searchCar"/>
 	</div>
-	<input type="text" id="search" name="searchCar"/>
-	</div>
+	<div>----리스트----</div>
+	<div id="carList"></div>
 <script type="text/javascript">
-  var oldVal="";
-  $(document).ready(function(){
+	var carList=[];
+	var oldVal="";
+
+  	$(document).ready(function(){
 	  $.ajax({
 	    	url:'/car/fuel',
 		    method: "GET",
@@ -27,72 +30,68 @@
 	    	var selectList = document.getElementById("feulList");
 	    	
 	        for (var i in result) {
-	            var option = document.createElement("sl");
-	            option.setAttribute("name", "fuel");
+	            var option = document.createElement("option");
+	            option.setAttribute("value",result[i]);
 	            option.innerText = result[i];
 	            selectList.appendChild(option);
 	        }
 	    })
-  });
+  	});
   
-  	$("#search").on("propertychange change keyup paste input", function() {
-	    var currentVal = $(this).val();
+  	$("#feulList").on("propertychange change", function(){
+  		var fuel = $("select[name=fuel]").val();
+		if(fuel=="default"){
+			if(oldVal != ""){
+				console.log("default고 oldVal이 있음.")
+			}else{
+				console.log("default고 oldVal이 없음.")
+			}
+		}else {
+			if(oldVal != ""){
+				console.log("default가 아니고 oldVal이 있음.")
+			}else{
+				console.log("default가 아니고 oldVal이 없음.")
+			}
+		}
+  	})
+  
+  	$("#search").on("propertychange keyup paste input", function() {
+  		var fuel = $("select[name=fuel]").val();
+  		var currentVal = $(this).val();
+  		
 	    if(currentVal == oldVal) {
 	        return;
 	    }
 	    oldVal = currentVal;
-	    $.ajax({
-	    	url:'/car/search',
-	    	contentType: "application/json; charset=utf-8", 
-		    data: {'car_model': oldVal }, //HTTP 요청과 함께 서버로 보낼 데이터 
-		    method: "GET",
-	    })
-	    .done(function(res){
-	    	console.log(res)
-	    })
+	    
+	    if(fuel=="default"){
+			if(oldVal != ""){
+				console.log("default고 oldVal이 있음.")
+			}else{
+				console.log("default고 oldVal이 없음.")
+			}
+		}else {
+			if(oldVal != ""){
+				console.log("default가 아니고 oldVal이 있음.")
+			}else{
+				console.log("default가 아니고 oldVal이 없음.")
+			}
+		}
 	});
-  	
-  	$("#fuel").hover(function(){
-  		
-  	});
+
+  	function listshow(){
+	  var list = document.getElementById("carList");
+	  
+	  for (var i in carList) {
+		  var line = document.createElement("p");
+		  var el_name = document.createElement("span");
+		  el_name.innerText=carList[i].car_model;
+		  line.appendChild(el_name);
+		  list.appendChild(line);
+      }
+  	}
 	 
   </script>
 </body>
-<style>
-.dropbtn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-content a:hover {background-color: #ddd;}
-
-.dropdown:hover .dropdown-content {display: block;}
-
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
-</style>
 </html>
 </layoutTag:layout>

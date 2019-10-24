@@ -4,6 +4,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.project.k51star.mapper.CarMapper">
+ 	<select id="categoryFuel" resultType="String">
+   	SELECT
+		distinct(fuel)
+	FROM 
+		car_info
+   </select>
 
    <select id="searchByModel" resultType="com.project.k51star.dto.CarInfoDto" parameterType="String">
       SELECT *
@@ -11,10 +17,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       WHERE car_model LIKE CONCAT("%",#{car_model},"%")
    </select>
    
-   <select id="categoryFuel" resultType="String">
-   	SELECT
-		distinct(fuel)
-	FROM 
-		car_info
+   <select id="searchByfuel" resultType="com.project.k51star.dto.CarInfoDto" parameterType="String">
+      SELECT *
+      FROM car_info
+      WHERE fuel LIKE CONCAT("%",#{fuel},"%")
    </select>
+  
 </mapper>
