@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title> Happy WOrld </title>
+<title>OIL ODI</title>
 </head>
 <body>
 <jsp:include page="navbar.jsp"></jsp:include>

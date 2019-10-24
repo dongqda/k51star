@@ -6,7 +6,7 @@
 	<!DOCTYPE html>
 	<html>
 <head>
-<title>Oil Navigation(가제)</title>
+<title>OIL ODI</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 

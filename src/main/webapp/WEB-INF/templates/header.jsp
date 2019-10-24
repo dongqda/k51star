@@ -30,7 +30,7 @@
 			<sec:authorize access="isAuthenticated()">
 				<li class="nav-item">
 					<form action="/logout" method="post">
-						<input type="submit" class="btn btn-lg btn-secondary" value="로그아웃">
+						<input type="submit" class="redButton" value="로그아웃">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					</form>
 				</li>
@@ -39,7 +39,7 @@
 			<sec:authorize access="isAnonymous()">
 				<li class="nav-item">
 					<form style="display: contents" action="/login" method="post">
-						<input type="submit" class="btn btn-lg btn-secondary" value="로그인">
+						<input type="submit" class="blueButton" value="로그인 | 회원가입">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					</form>
 				</li>
