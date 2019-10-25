@@ -38,7 +38,7 @@ $(document).ready(function(){
 		<div id="panel" style="margin-bottom:10px;">
 				<div>
 	  	<select name="fuel" id="feulList">
-	  		<option  value="default" selected>유종의 미</option>
+	  		<option  value="default" selected>유종선택하기</option>
 	  	</select>
 		<input type="text" id="search" name="searchCar"/>
 	</div>
@@ -178,9 +178,6 @@ $(document).ready(function(){
 	  for (var i in selectList) {
 		  var line = document.createElement("p");
 		  var el_name = document.createElement("a");
-// 		  el_name.setAttribute("href","#")
-// 		  el_name.setAttribute("style","text-decoration:none")
-// 		  el_name.setAttribute("onclick","listClick(this)")
 		  el_name.setAttribute("id",selectList[i].car_id);
 		  el_name.setAttribute("title",selectList[i].manufacturer);
 		  el_name.innerText=selectList[i].car_model;
@@ -190,15 +187,28 @@ $(document).ready(function(){
   	}
   	
   	function listClick(a){
+  		selectList=[];
+  		var select={};
   		var index = carList.findIndex(function(item, i){
   			if(item.car_id == a.id){
+  				select=item;
   				selectList.push(item);
   			    index = i;
   			    return i;
   			  }
 		});
-  		if (index !== undefined) carList.splice(index, 1);
+  		carList=[];
   		listshow();
+  		$.ajax({
+  			url:'/car/info',
+  			method: "GET",
+  			contentType: "application/json; charset=utf-8", 
+  			data: {'car_id': select.car_id },
+  			dataType: "json",
+  		})
+  		.done(function(res){
+  			console.log(res);
+  		})
   	}
   	
   	function search(fuel, car_model){
@@ -217,11 +227,11 @@ $(document).ready(function(){
   			    dataType: "json",
   			})
   			.done(function(res){
-  				console.log(res);
   				carList=res;
   				listshow();
   			})
   		}
+  		
   	} 
   </script>
 </body>
