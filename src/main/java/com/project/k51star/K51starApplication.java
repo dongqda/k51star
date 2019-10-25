@@ -17,7 +17,8 @@ public class K51starApplication {
 		SpringApplication.run(K51starApplication.class, args);
 	}
 
-	@Autowired AccountRepository accountRepository;
+	@Autowired 
+	AccountRepository accountRepository;
    
 	@Autowired
 	PasswordEncoder passwordEncoder;

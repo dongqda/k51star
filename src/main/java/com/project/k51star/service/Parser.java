@@ -18,7 +18,6 @@ public class Parser{
 	private static HttpURLConnection con;
 	
 	public static void main(String[] args) throws IOException {
-		
 	}
 	public static JSONObject parsing(String requesturl) throws IOException {
 		url = new URL(requesturl);

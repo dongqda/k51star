@@ -1,6 +1,7 @@
 package com.project.k51star.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -18,11 +19,15 @@ public class CarService {
 		return mapper.categoryFuel();
 	}
 	
-	public List<CarInfoDto> searchByModel(String car_model) {
-		return mapper.searchByModel(car_model);
+	public List<CarInfoDto> searchModel(Map<String, String> map) {
+		return mapper.searchModel(map);
 	}
 	
-	public List<CarInfoDto> searchByfuel(String fuel){
-		return mapper.searchByfuel(fuel);
+	public void updateCarInfo(Map<String,Integer> map) {
+		mapper.updateCarInfo(map);
+	}
+	
+	public void insertCarInfo(Map<String,Integer> map) {
+		mapper.insertCarInfo(map);
 	}
 }

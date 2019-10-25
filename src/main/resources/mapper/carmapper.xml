@@ -11,16 +11,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		car_info
    </select>
 
-   <select id="searchByModel" resultType="com.project.k51star.dto.CarInfoDto" parameterType="String">
+   <select id="searchModel" resultType="com.project.k51star.dto.CarInfoDto" parameterType="hashmap">
       SELECT *
       FROM car_info
-      WHERE car_model LIKE CONCAT("%",#{car_model},"%")
+      WHERE 
+      	fuel LIKE CONCAT("%",#{fuel},"%")
+      AND
+      	(
+      		car_model LIKE CONCAT("%",#{car_model},"%")
+      	OR
+      		manufacturer LIKE CONCAT("%",#{car_model},"%")
+      	)
    </select>
    
-   <select id="searchByfuel" resultType="com.project.k51star.dto.CarInfoDto" parameterType="String">
-      SELECT *
-      FROM car_info
-      WHERE fuel LIKE CONCAT("%",#{fuel},"%")
-   </select>
+   <update id="updateCarInfo" parameterType="hashmap">
+	   UPDATE 
+	   	car 
+	   SET 
+	   	car_id=#{car_id}
+	   WHERE 
+	   	member_id=#{member_id}
+   </update>
+   
+   <insert id="insertCarInfo" parameterType="hashmap">
+	   INSERT INTO 
+	   	car (member_id, car_id)
+	   VALUE 
+	   	(#{member_id},#{car_id})
+   </insert>
   
 </mapper>

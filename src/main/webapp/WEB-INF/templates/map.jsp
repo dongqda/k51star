@@ -31,7 +31,12 @@
 	        <div id="result">result</div>
 	    </div>
 	</div>
+	<jsp:include page="footer.jsp"></jsp:include>
 </div>
+	<script>
+		var menu = document.getElementById("menu");
+		menu.className="nav-link dropdown-toggle active";
+	</script>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8d47821d08c14a3b647e14eafa6ab215&libraries=services"></script>
 	<script  type="text/javascript">

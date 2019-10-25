@@ -89,15 +89,27 @@ main{
   }
 }
 
+/* form border white */
+#whiteForm{
+  border:3px solid white;
+  padding:50px;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  #whiteForm{
+    border:none;
+    padding:0px;
+  }
+}
 
 /*
  * Cover
  */
-.cover {
+/* .cover {
   padding: 0 1.5rem;
-}
+} */
 .cover .btn-lg {
-  padding: .75rem 1.25rem;
+  /* padding: .75rem 1.25rem; */
   font-weight: 700;
 }
 
