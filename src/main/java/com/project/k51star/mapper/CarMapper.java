@@ -14,5 +14,9 @@ public interface CarMapper {
 	
 	//모델로 차량 검색
 	public List<CarInfoDto> searchModel(Map<String, String> map);
+	//이미 등록된 차량이 있을 때 정보 업데이트
+	public void updateCarInfo(Map<String, Integer> map);
+	//처음 등록하는 경우
+	public void insertCarInfo(Map<String, Integer> map);
 	
 }

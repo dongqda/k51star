@@ -24,5 +24,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       	)
    </select>
    
+   <update id="updateCarInfo" parameterType="hashmap">
+	   UPDATE 
+	   	car 
+	   SET 
+	   	car_id=#{car_id}
+	   WHERE 
+	   	member_id=#{member_id}
+   </update>
+   
+   <insert id="insertCarInfo" parameterType="hashmap">
+	   INSERT INTO 
+	   	car (member_id, car_id)
+	   VALUE 
+	   	(#{member_id},#{car_id})
+   </insert>
   
 </mapper>

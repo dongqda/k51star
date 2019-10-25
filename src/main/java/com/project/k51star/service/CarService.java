@@ -22,4 +22,12 @@ public class CarService {
 	public List<CarInfoDto> searchModel(Map<String, String> map) {
 		return mapper.searchModel(map);
 	}
+	
+	public void updateCarInfo(Map<String,Integer> map) {
+		mapper.updateCarInfo(map);
+	}
+	
+	public void insertCarInfo(Map<String,Integer> map) {
+		mapper.insertCarInfo(map);
+	}
 }

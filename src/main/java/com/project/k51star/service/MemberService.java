@@ -21,4 +21,8 @@ public class MemberService {
     public void deleteMember(String email){
     	memberMapper.deleteMember(email);
     }
+    
+    public int searchMemberById(int id) {
+    	return memberMapper.searchMemberById(id+"");
+    }
 }

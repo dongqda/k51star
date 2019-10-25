@@ -30,4 +30,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE 
 		EMAIL=#{email};
 	</delete>
+	
+	<select id="searchMemberById" parameterType="String" resultType="Integer">
+		SELECT COUNT(*)
+		FROM car
+		WHERE member_id=#{id}
+	</select>
 </mapper>
