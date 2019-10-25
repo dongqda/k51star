@@ -45,7 +45,7 @@ $(document).ready(function(){
 			<input type="text" id="search" class="form-control" name="searchCar" placeholder="차량명을 입력해주세요"/>
 			<label>등록 할 차량</label>
 			<div id="selectList"></div>
-			<select class="form-control" id="carList" name="carList" onchange="listClick()">
+			<select class="form-control" id="carList" name="carList">
 			</select>
 		</div>
 		<form id="whiteForm" class="form-signin" method="post" action="/updateMember">
@@ -160,12 +160,45 @@ $(document).ready(function(){
 	    search(fuel,oldVal);
 	});
   	
-
+  	$("#carList").on("propertychange change", function(){
+  		var car = $("select[name=carList]").val();
+	  	selectList=[];
+	  	var select={};
+	  	var index = carList.findIndex(function(item, i){
+	  		if(item.car_model == car){
+	  			select=item;
+	  			selectList.push(item);
+	  		    index = i;
+	  		    return i;
+	  		  }
+		});
+	  	carList=[];
+	  	document.getElementById("carList").style.display="none";
+	  	listshow();
+		$.ajax({
+	  		url:'/car/info',
+	  		method: "GET",
+	  		contentType: "application/json; charset=utf-8", 
+	  		data: {
+	  			'car_id': select.car_id,
+	  			'member_id': ${user.id},	
+	  		},
+	  		dataType: "json",
+	  	})
+	  	.done(function(res){
+	  		console.log(res)
+	  	})
+  	});
+  	
   	function listshow(){
 	  var list = document.getElementById("carList");
 	  var slist = document.getElementById("selectList");
 	  list.innerHTML="";
 	  slist.innerHTML="";
+	  var def = document.createElement("option");
+	  def.setAttribute("value","default");
+	  def.innerText="MODEL";
+	  list.appendChild(def);
 	  for (var i in carList) {
 		  var el_name = document.createElement("option");
 		  el_name.setAttribute("id",carList[i].car_id);
@@ -182,36 +215,6 @@ $(document).ready(function(){
 		  line.appendChild(el_name);
 		  slist.appendChild(line);
       }
-  	}
-  	
-  	function listClick(){
-  		var car = $("select[name=carList]").val();
-  		selectList=[];
-  		var select={};
-  		var index = carList.findIndex(function(item, i){
-  			if(item.car_model == car){
-  				select=item;
-  				selectList.push(item);
-  			    index = i;
-  			    return i;
-  			  }
-		});
-  		carList=[];
-  		document.getElementById("carList").style.display="none";
-  		listshow();
-  		$.ajax({
-  			url:'/car/info',
-  			method: "GET",
-  			contentType: "application/json; charset=utf-8", 
-  			data: {
-  				'car_id': select.car_id,
-  				'member_id': ${user.id},	
-  			},
-  			dataType: "json",
-  		})
-  		.done(function(res){
-  			console.log(res)
-  		})
   	}
   	
   	function search(fuel, car_model){
