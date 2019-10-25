@@ -33,6 +33,7 @@ dependencies {
 	compile('org.apache.tomcat.embed:tomcat-embed-jasper')
 
 	compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+	compile group: 'org.webjars.npm', name: 'proj4', version: '2.5.0'
 	
 	
 	runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
