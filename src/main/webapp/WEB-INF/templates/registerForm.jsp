@@ -14,7 +14,7 @@
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
 	<jsp:include page="header.jsp"></jsp:include>
 	<main role="main" class="inner cover">
-		<form class="form-signin" method="post" action="/register" style="border:3px solid white;padding:50px;">
+		<form id="whiteForm" class="form-signin" method="post" action="/register">
 			<img class="mb-4" src="https://image.flaticon.com/icons/svg/1476/1476715.svg" alt="" width="72" height="72">
 			<h1 class="h3 mb-3 font-weight-normal">Please Sign Up</h1>
 			<label for="inputEmail" class="sr-only">Email address</label>
@@ -29,10 +29,10 @@
 					<input type="checkbox" value="remember-me"> Remember me
 				</label>
 			</div>
-			<input class="blueButton" type="submit" value="회원가입"/>
-			<input class="redButton" type="button" onclick="location.href='/'" value="취소"/>
+			<input class="btn btn-lg btn-secondary" style="padding: .3rem 1rem;" type="submit" value="회원가입"/>
+			<input class="btn btn-lg btn-secondary" style="padding: .3rem 1rem;" type="button" onclick="location.href='/'" value="취소"/>
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-			<p class="mt-5 mb-3 text-muted">© 2019</p>
+			<p class="mt-5 mb-3 text-muted" style="margin-top:20px;">© 2019</p>
 		</form>
 	</main>
 </div>

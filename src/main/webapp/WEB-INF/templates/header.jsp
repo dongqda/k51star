@@ -3,52 +3,38 @@
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<nav class="navbar navbar-expand-md bg-none navbar-dark ">
-	<a class="navbar-brand" href="/"><h3>OIL ODI</h3></a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-	<div class="collapse navbar-collapse" id="collapsibleNavbar">
-		<ul class="navbar-nav ml-auto topnav">
-			<li class="nav-item">
-				<a id="home" class="nav-link" href="/">Home</a>
-			</li>
-			<li class="nav-item">
-				<a id="about" class="nav-link" href="/about">About</a>
-			</li>
-			<li class="nav-item">
-				<a id="contact" class="nav-link" href="/contact">Contact</a>
-			</li> 
-			<li class="nav-item dropdown">
-	        	<a id="menu" class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Menu</a>
-				<div class="dropdown-menu">
-					<sec:authorize access="isAuthenticated()">
-						<a class="dropdown-item" href="/myPage">마이페이지</a>
-						<hr style="color:black">
-					</sec:authorize>
-					<a class="dropdown-item" href="/map">지도</a>
-					<a class="dropdown-item" href="/dashBoard">주유소 정보</a>
-				</div>
-			</li>
-			<!-- 로그인중 -->
-			<sec:authorize access="isAuthenticated()">
-				<li class="nav-item">
-					<form action="/logout" method="post">
-						<input type="submit" class="redButton" value="로그아웃">
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-					</form>
-				</li>
-			</sec:authorize>
-			<!-- 로그아웃중 -->
-			<sec:authorize access="isAnonymous()">
-				<li class="nav-item">
-					<form style="display: contents" action="/login" method="post">
-						<input type="submit" class="blueButton" value="로그인 | 회원가입">
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-					</form>
-				</li>
-			</sec:authorize>   
-		</ul>
-	</div>  
-</nav>
 
+
+<header class="masthead">
+	<div class="inner">
+		<a class="navbar-brand" href="/"><h3>OIL ODI</h3></a>
+		<!-- 로그인중 -->
+		<sec:authorize access="isAuthenticated()">
+			<form style="display: contents" action="/logout" method="post">
+				<input type="submit" class="btn btn-lg btn-secondary" style="padding: .3rem 1rem;margin-bottom: 10px;" value="로그아웃">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			</form>
+		</sec:authorize>
+		<!-- 로그아웃중 -->
+		<sec:authorize access="isAnonymous()">
+			<form style="display: contents" action="/login" method="post">
+				<input type="submit" class="btn btn-lg btn-secondary" style="padding: .3rem 1rem;margin-bottom: 10px;" value="로그인">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			</form>
+		</sec:authorize>   
+		<nav class="nav nav-masthead justify-content-center">
+			<a id="home" class="nav-link" href="/">Home</a>
+			<a id="about" class="nav-link" href="/about">About</a>
+			<a id="" class="nav-link" href="/contact">Contact</a>
+			<a id="menu" class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Menu</a>
+			<div class="dropdown-menu">
+				<sec:authorize access="isAuthenticated()">
+					<a class="dropdown-item" href="/myPage">마이페이지</a>
+					<hr style="color:black">
+				</sec:authorize>
+				<a class="dropdown-item" href="/map">지도</a>
+				<a class="dropdown-item" href="/dashBoard">주유소 정보</a>
+			</div>
+		</nav>
+	</div>
+</header>
