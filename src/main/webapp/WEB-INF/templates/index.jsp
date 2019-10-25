@@ -14,7 +14,6 @@
 <body class="text-center">
 	<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
 		<jsp:include page="header.jsp"></jsp:include>
-
 		<main role="main" class="inner cover">
 		<h1 class="cover-heading">Home</h1>
 		<br>
@@ -26,13 +25,11 @@
 			<a href="/map" class="btn btn-lg btn-secondary">Enter</a>
 		</p>
 		</main>
-
 		<jsp:include page="footer.jsp"></jsp:include>
 	</div>
 
 <script>
 	var home = document.getElementById("home");
-	
 	home.className="nav-link active";
 </script>
 

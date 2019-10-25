@@ -40,6 +40,7 @@
 	        <div class="col-md-6 임시클래스">주유소 상세정보</div>
 	    </div>
 	</div>
+	<jsp:include page="footer.jsp"></jsp:include>
 </div>
 
 

@@ -34,21 +34,20 @@ $(document).ready(function(){
 	<jsp:include page="header.jsp"></jsp:include>
 	<main role="main" class="inner cover">
 		<div id="flip" class="btn btn-lg btn-secondary" style="width: 100%;margin-bottom:10px">자동차 등록</div>
-		<input type="hidden" name="email" value="${user.email}"/>
-		<div id="panel" style="margin-bottom:10px;">
-				<div>
-	  	<select name="fuel" id="feulList">
-	  		<option  value="default" selected>유종의 미</option>
-	  	</select>
-		<input type="text" id="search" name="searchCar"/>
-	</div>
-	<div>----선택한 리스트---</div>
-	<div id="selectList"></div>
-	<div>----리스트----</div>
-	<div id="carList"></div>
-
+			<input type="hidden" name="email" value="${user.email}"/>
+			<div id="panel" style="margin-bottom:10px;"><div>
+				<div class="form-group">
+				  <select class="form-control" name="fuel" id="feulList">
+				    <option  value="default" selected>유종을 선택해주세요</option>
+				  </select>
+				</div>
+			</div>
+			<input type="text" id="search" class="form-control" name="searchCar" placeholder="차량명을 입력해주세요"/>
+			<label>등록 할 차량</label>
+			<div id="selectList"></div>
+			<div id="carList"></div>
 		</div>
-		<form class="form-signin" method="post" action="/updateMember" style="border:3px solid white;padding:50px;">
+		<form id="whiteForm" class="form-signin" method="post" action="/updateMember">
 			<img class="mb-4" src="https://image.flaticon.com/icons/svg/1476/1476715.svg" alt="" width="72" height="72">
 			<h1 class="h5 mb-3 font-weight-normal">[${user.name}]님의 마이페이지<br></h1>
 			<label for="inputEmail" class="sr-only">Email address</label>
@@ -58,12 +57,12 @@ $(document).ready(function(){
 			<label for="inputPassword" class="sr-only">Password</label>
 			<input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" value="" required="required">
 			<input type="hidden" name="role" value="ROLE_USER" />
-			<input class="blueButton" type="submit" data-toggle="modal" data-target="#myModal2" value="수정완료"/>
-			<input class="redButton" type="reset" value="정정"/>
+			<input class="btn btn-lg btn-secondary" style="padding: .3rem 1rem;" type="submit" data-toggle="modal" data-target="#myModal2" value="수정완료"/>
+			<input class="btn btn-lg btn-secondary" style="padding: .3rem 1rem;" type="reset" value="정정"/>
 			<hr style="background:white">
-			 <a data-toggle="modal" data-target="#myModal1">탈퇴하기</a>
+			<a data-toggle="modal" data-target="#myModal1" style="border: 3px solid white;padding: 5 10 5 10;">탈퇴하기</a>
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-			<p class="mt-5 mb-3 text-muted">© 2019</p>
+			<p class="mt-5 mb-3 text-muted" style="margin-top:20px;">© 2019</p>
 		</form>
 		
 		
@@ -71,20 +70,20 @@ $(document).ready(function(){
 		<!-- The Modal1 -->
 		<div class="modal fade" id="myModal1">
 			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
+				<div class="modal-content" style="background:#333;">
 					<!-- Modal Header -->
 					<div class="modal-header">
-						<h4 class="modal-title" style="color: black;text-shadow: none;">탈퇴 확인</h4>
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title" style="color: white;text-shadow: none;">탈퇴 확인</h4>
+						<button type="button" class="close" style="color: white; data-dismiss="modal">&times;</button>
 					</div>
 					<!-- Modal body -->
 					<div class="modal-body">
-						<p style="color: black;text-shadow: none;">정말 탈퇴하시겠습니까?</p>
+						<p style="color: white;text-shadow: none;">정말 탈퇴하시겠습니까?</p>
 					</div>
 					<!-- Modal footer -->
 					<div class="modal-footer">
-						<button type="button" class="blueButton" data-dismiss="modal" onclick="location.href='/deleteMember'">확인</button>
-						<button type="button" class="redButton" data-dismiss="modal">취소</button>
+						<button type="button" class="btn btn-lg btn-secondary" style="padding: .3rem 1rem;" data-dismiss="modal" onclick="location.href='/deleteMember'">확인</button>
+						<button type="button" class="btn btn-lg btn-secondary" style="padding: .3rem 1rem;" data-dismiss="modal">취소</button>
 					</div>
 				</div>
 			</div>
@@ -104,7 +103,7 @@ $(document).ready(function(){
 					</div>
 					<!-- Modal footer -->
 					<div class="modal-footer">
-						<button type="button" class="blueButton" data-dismiss="modal">확인</button>
+						<button type="button" class="btn btn-lg btn-secondary" style="padding: .3rem 1rem;" data-dismiss="modal">확인</button>
 					</div>
 				</div>
 			</div>
@@ -112,6 +111,10 @@ $(document).ready(function(){
 		
 	</main>
 </div>
+<script>
+	var menu = document.getElementById("menu");
+	menu.className="nav-link dropdown-toggle active";
+</script>
 <script type="text/javascript">
 	var carList=[];
 	var selectList=[];
@@ -167,7 +170,7 @@ $(document).ready(function(){
 		  var line = document.createElement("p");
 		  var el_name = document.createElement("a");
 		  el_name.setAttribute("href","#")
-		  el_name.setAttribute("style","text-decoration:none")
+		  el_name.setAttribute("style","text-decoration:none;")
 		  el_name.setAttribute("onclick","listClick(this)")
 		  el_name.setAttribute("id",carList[i].car_id);
 		  el_name.setAttribute("title",carList[i].manufacturer);
@@ -179,8 +182,8 @@ $(document).ready(function(){
 		  var line = document.createElement("p");
 		  var el_name = document.createElement("a");
 // 		  el_name.setAttribute("href","#")
-// 		  el_name.setAttribute("style","text-decoration:none")
 // 		  el_name.setAttribute("onclick","listClick(this)")
+// 		  el_name.setAttribute("style","border:3px solid white")
 		  el_name.setAttribute("id",selectList[i].car_id);
 		  el_name.setAttribute("title",selectList[i].manufacturer);
 		  el_name.innerText=selectList[i].car_model;
@@ -190,6 +193,7 @@ $(document).ready(function(){
   	}
   	
   	function listClick(a){
+  		selectList = [];
   		var index = carList.findIndex(function(item, i){
   			if(item.car_id == a.id){
   				selectList.push(item);
@@ -198,6 +202,7 @@ $(document).ready(function(){
   			  }
 		});
   		if (index !== undefined) carList.splice(index, 1);
+  		carList= [];
   		listshow();
   	}
   	
