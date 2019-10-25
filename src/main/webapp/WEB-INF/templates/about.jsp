@@ -35,7 +35,6 @@
 
 <script>
 	var about = document.getElementById("about");
-	
 	about.className="nav-link active";
 </script>
 

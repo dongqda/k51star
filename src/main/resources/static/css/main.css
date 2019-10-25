@@ -89,6 +89,18 @@ main{
   }
 }
 
+/* form border white */
+#whiteForm{
+  border:3px solid white;
+  padding:50px;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  #whiteForm{
+    border:none;
+    padding:0px;
+  }
+}
 
 /*
  * Cover
