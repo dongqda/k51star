@@ -36,6 +36,7 @@ public class MemberController {
 		return "myPage";
 	}
 	
+	
 	@RequestMapping(value="/deleteMember")
 	public String deleteMember(Principal principal,HttpSession session) {
 		String email = principal.getName();
@@ -43,9 +44,6 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:/deleteMessage";
 	}
-	
-	
-	 
 	
 	@RequestMapping(value="/updateMember")
 	public String updateMember(Principal principal,HttpServletRequest request) {

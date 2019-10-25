@@ -45,7 +45,8 @@ $(document).ready(function(){
 			<input type="text" id="search" class="form-control" name="searchCar" placeholder="차량명을 입력해주세요"/>
 			<label>등록 할 차량</label>
 			<div id="selectList"></div>
-			<div id="carList"></div>
+			<select class="form-control" id="carList" name="carList" onchange="listClick()">
+			</select>
 		</div>
 		<form id="whiteForm" class="form-signin" method="post" action="/updateMember">
 			<img class="mb-4" src="https://image.flaticon.com/icons/svg/1476/1476715.svg" alt="" width="72" height="72">
@@ -135,6 +136,7 @@ $(document).ready(function(){
   	});
   
   	$("#feulList").on("propertychange change", function(){
+  		document.getElementById("carList").style.display="";
   		var fuel = $("select[name=fuel]").val();
 		if(fuel=="default"){
 			fuel="";
@@ -143,6 +145,7 @@ $(document).ready(function(){
   	})
   
   	$("#search").on("propertychange keyup paste input", function() {
+  		document.getElementById("carList").style.display="";
   		var fuel = $("select[name=fuel]").val();
   		var currentVal = $(this).val();
   		
@@ -164,16 +167,11 @@ $(document).ready(function(){
 	  list.innerHTML="";
 	  slist.innerHTML="";
 	  for (var i in carList) {
-		  var line = document.createElement("p");
-		  var el_name = document.createElement("a");
-		  el_name.setAttribute("href","#")
-		  el_name.setAttribute("style","text-decoration:none;")
-		  el_name.setAttribute("onclick","listClick(this)")
+		  var el_name = document.createElement("option");
 		  el_name.setAttribute("id",carList[i].car_id);
 		  el_name.setAttribute("title",carList[i].manufacturer);
 		  el_name.innerText=carList[i].car_model;
-		  line.appendChild(el_name);
-		  list.appendChild(line);
+		  list.appendChild(el_name);
       }
 	  for (var i in selectList) {
 		  var line = document.createElement("p");
@@ -186,11 +184,12 @@ $(document).ready(function(){
       }
   	}
   	
-  	function listClick(a){
+  	function listClick(){
+  		var car = $("select[name=carList]").val();
   		selectList=[];
   		var select={};
   		var index = carList.findIndex(function(item, i){
-  			if(item.car_id == a.id){
+  			if(item.car_model == car){
   				select=item;
   				selectList.push(item);
   			    index = i;
@@ -198,16 +197,20 @@ $(document).ready(function(){
   			  }
 		});
   		carList=[];
+  		document.getElementById("carList").style.display="none";
   		listshow();
   		$.ajax({
   			url:'/car/info',
   			method: "GET",
   			contentType: "application/json; charset=utf-8", 
-  			data: {'car_id': select.car_id },
+  			data: {
+  				'car_id': select.car_id,
+  				'member_id': ${user.id},	
+  			},
   			dataType: "json",
   		})
   		.done(function(res){
-  			console.log(res);
+  			console.log(res)
   		})
   	}
   	
