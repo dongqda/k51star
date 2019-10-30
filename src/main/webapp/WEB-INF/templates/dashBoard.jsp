@@ -39,16 +39,21 @@
 	        <div class="col-md-6 임시클래스">반경내 주유소</div>
 	        <div class="col-md-6 임시클래스">주유소 상세정보</div>
 	    </div>
+	  	  <div id="chart_div1" ></div>
+	  	  <div id="chart_div2" style="display: none"></div>
+	  	  <div id="chart_div3" style="display: none"></div>
+	  	  <div id="chart_div4" style="display: none"></div>
+	  	  <div id="chart_div5" style="display: none"></div>
 	    <div class = "row">
-	    <div id="maplist" class="col-md-6 임시클래스" style="min-height:500px">
-	    	<ul id="mlist"></ul>
-	    </div>
-	    <div id="map" class="col-md-6 임시클래스" style="min-height:500px"></div>
+		    <div id="maplist" class="col-md-6 임시클래스" style="min-height:500px">
+		    	<ul id="mlist"></ul>
+		    </div>
+		    <div id="map" class="col-md-6 임시클래스" style="min-height:500px"></div>
 	    </div>
 	    
 	</div>
-	<jsp:include page="footer.jsp"></jsp:include>
 </div>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.3/proj4-src.js"></script>
 	<script type="text/javascript"
@@ -58,7 +63,6 @@
     	menu.className="nav-link dropdown-toggle active";
     </script>
   <script type="text/javascript">
-
   var data = {};
   var key = "F612190920";
 	var from = 'WGS84';
@@ -69,15 +73,99 @@
 	var position= [];
 
   $(document).ready(function(){
-// 	    loadData();
-	    ready();
+	    loadData();
+// 	    ready();
+
 	});
+  function drawChart() {
+			var chartdata1 = new google.visualization.DataTable();
+			var chartdata2 = new google.visualization.DataTable();
+			var chartdata3 = new google.visualization.DataTable();
+			var chartdata4 = new google.visualization.DataTable();
+			var chartdata5 = new google.visualization.DataTable();
+
+		    chartdata1.addColumn('string', '날짜');
+		    chartdata1.addColumn('number', '휘발유');
+		    
+		    chartdata2.addColumn('string', '날짜');
+		    chartdata2.addColumn('number', '고급휘발유');
+		    		    
+		    chartdata3.addColumn('string', '날짜');
+		    chartdata3.addColumn('number', '실내등유');
+		    
+		    chartdata4.addColumn('string', '날짜');
+		    chartdata4.addColumn('number', '경유');
+		    
+		    chartdata5.addColumn('string', '날짜');
+		    chartdata5.addColumn('number', 'LPG');
+
+			var arr = data.sevendays;
+			console.log(arr);
+			for(var i =0; i<7; i++){
+			var tmp1 =[];
+			tmp1.push(arr[i*5].DATE);
+			var tmp2 =[];
+			tmp2.push(arr[i*5].DATE);
+			var tmp3 =[];
+			tmp3.push(arr[i*5].DATE);
+			var tmp4 =[];
+			tmp4.push(arr[i*5].DATE);
+			var tmp5 =[];
+			tmp5.push(arr[i*5].DATE);
+			for(var j=0; j<5; j++){
+					var price = arr[i*5+j].PRICE;
+				if(j==0){
+					tmp1.push(price);
+				}else if(j==1){
+					tmp2.push(price);
+				}else if(j==2){
+					tmp3.push(price);
+				}else if(j==3){
+					tmp4.push(price);
+				}else{
+					tmp5.push(price);
+				}
+
+			}
+			chartdata1.addRow(tmp1);
+			chartdata2.addRow(tmp2);
+			chartdata3.addRow(tmp3);
+			chartdata4.addRow(tmp4);
+			chartdata5.addRow(tmp5);
+
+	      }
+
+      var options = {
+        hAxis: {
+          title: '날짜',
+          logScale: false
+        },
+        vAxis: {
+          title: '가격',
+          logScale: false,
+      	},
+      	pointSize: 7
+      };
+	 
+      var chart1 = new google.visualization.LineChart(document.getElementById('chart_div1'));
+      var chart2 = new google.visualization.LineChart(document.getElementById('chart_div2'));
+      var chart3 = new google.visualization.LineChart(document.getElementById('chart_div3'));
+      var chart4 = new google.visualization.LineChart(document.getElementById('chart_div4'));
+      var chart5 = new google.visualization.LineChart(document.getElementById('chart_div5'));
+
+      chart1.draw(chartdata1, options);
+      chart2.draw(chartdata2, options);
+      chart3.draw(chartdata3, options);
+      chart4.draw(chartdata4, options);
+      chart5.draw(chartdata5, options);	  
+    }
+  
+  
   function movemap(x,y){
-		console.log(x+" "+ y);
+// 		console.log(x+" "+ y);
       map.setCenter(new kakao.maps.LatLng(x,y));
   }
   function ready(){
-		console.log(typeof(position));
 		var container = document.getElementById('map');
 		 if(navigator.geolocation){
 			navigator.geolocation.getCurrentPosition(function(position) {
@@ -85,7 +173,7 @@
 			    var y = position.coords.longitude;
 			    var options = { //지도를 생성할 때 필요한 기본 옵션
 			           center: new kakao.maps.LatLng(x, y), //지도의 중심좌표.
-			           level: 6 //지도의 레벨(확대, 축소 정도)
+			           level: 6	 //지도의 레벨(확대, 축소 정도)
 			        };
 	
 			    map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
@@ -104,10 +192,10 @@
 			              image: icon
 			              }).setMap(map);
 			    var geocoder = new kakao.maps.services.Geocoder();
-				console.log(x+" " +y);
+// 				console.log(x+" " +y);
 				var xy = [y,x];
 				var result = proj4(from, to, xy);
-				console.log(result) // result: [ 324317.673778079, 547700.4604186672 ]
+// 				console.log(result) // result: [ 324317.673778079, 547700.4604186672 ]
 				
 				var coord = new kakao.maps.LatLng(x, y);	
 			    $.ajax({
@@ -117,7 +205,7 @@
 				      method: "GET" //HTTP 요청 메소드
 				})
 				.done(function(res){
-					console.log(res);
+// 					console.log(res);
 			          var arr = res.RESULT.OIL;
 			          var length = arr.length<10?arrlength:10;
 			          for(var a =0; a<length; a++){
@@ -125,7 +213,7 @@
 			            stationinfo.title = arr[a].OS_NM;
 			            var reprojectedCoords = proj4(to, from, [arr[a].GIS_X_COOR,arr[a].GIS_Y_COOR]);
 			            stationinfo.latlng = new kakao.maps.LatLng(reprojectedCoords[1],reprojectedCoords[0]);
-			            console.log(stationinfo);
+// 			            console.log(stationinfo);
 			            position[a] = stationinfo;
 			            var elem = document.createElement('li');
 			            elem.innerHTML = '<a style="cursor:pointer" onclick="movemap(' + reprojectedCoords[1] +','+reprojectedCoords[0] +');">'+stationinfo.title+'</a>';
@@ -168,7 +256,7 @@
 	    $.ajax({
 		      url: "/parsing", // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
 		      contentType: "application/json; charset=utf-8", 
-		      data: {'requesturl': "http://www.opinet.co.kr/api/lowTop10.do?out=json&code="+key+"8&prodcd=B027" }, //HTTP 요청과 함께 서버로 보낼 데이터 
+		      data: {'requesturl': "http://www.opinet.co.kr/api/lowTop10.do?out=json&code="+key+"&prodcd=B027" }, //HTTP 요청과 함께 서버로 보낼 데이터 
 		      method: "GET" //HTTP 요청 메소드
 		})
 		.done(function(res){
@@ -250,7 +338,8 @@
 												})
 												.done(function(res){
 													data.avgprice = res.RESULT.OIL;
-													
+												      google.charts.load('current', {'packages':['line', 'corechart']});
+													  google.setOnLoadCallback(drawChart);
 												});	
 											});		
 									});
