@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags"%>
 <layoutTag:layout>
-<!DOCTYPE html>
-<html>
+	<!DOCTYPE html>
+	<html>
 <head>
 <title>OIL ODI</title>
 <meta charset="UTF-8">
@@ -14,50 +14,53 @@
 <link rel="stylesheet" href="css/main.css">
 
 <style type="text/css">
-.임시클래스{
- border:1px solid black;
+.임시클래스 {
+	border: 1px solid black;
 }
 
-.navbar{
-	margin-bottom:20px;
+.navbar {
+	margin-bottom: 20px;
 }
-
 </style>
 </head>
 <body class="text-center">
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-	<jsp:include page="header.jsp"></jsp:include>
-	<div class="container">
-	    <div class="row">
-	        <div class="col-md-4 임시클래스">전국 주유소 평균</div>
-	        <div class="col-md-4 임시클래스">최근 7일 전국 일일 평균가</div>
-	        <div class="col-md-4 임시클래스">최근 1주간 주간 평균가</div>
-	        <div class="col-md-6 임시클래스">시도별 주유소 평균가격(현재)</div>
-	        <div class="col-md-6 임시클래스">시군구별 주유소 평균가격(현재)</div>
-	        <div class="col-md-6 임시클래스">이미지를 넣는다.(top10)주유소</div>
-	        <div class="col-md-6 임시클래스">전국 /지역별 최저가 주유소(Top10)</div>
-	        <div class="col-md-6 임시클래스">반경내 주유소</div>
-	        <div class="col-md-6 임시클래스">주유소 상세정보</div>
-	    </div>
-	    <div class = "row">
-	    <div id="maplist" class="col-md-6 임시클래스" style="min-height:500px">
-	    	<ul id="mlist"></ul>
-	    </div>
-	    <div id="map" class="col-md-6 임시클래스" style="min-height:500px"></div>
-	    </div>
-	    
+	<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+		<jsp:include page="header.jsp"></jsp:include>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 임시클래스">
+					<canvas id="myChart" width="400" height="400"></canvas>
+				</div>
+				<div class="col-md-4 임시클래스">최근 7일 전국 일일 평균가</div>
+				<div class="col-md-4 임시클래스">최근 1주간 주간 평균가</div>
+				<div class="col-md-6 임시클래스">시도별 주유소 평균가격(현재)</div>
+				<div class="col-md-6 임시클래스  slideshow-container" id="container"></div>
+				<div class="col-md-6 임시클래스">이미지를 넣는다.(top10)주유소</div>
+				<div class="col-md-6 임시클래스">전국 /지역별 최저가 주유소(Top10)</div>
+				<div class="col-md-6 임시클래스">반경내 주유소</div>
+				<div class="col-md-6 임시클래스">주유소 상세정보</div>
+			</div>
+			<div class="row">
+				<div id="maplist" class="col-md-6 임시클래스" style="min-height: 500px">
+					<ul id="mlist"></ul>
+				</div>
+				<div id="map" class="col-md-6 임시클래스" style="min-height: 500px"></div>
+			</div>
+
+		</div>
+		<jsp:include page="footer.jsp"></jsp:include>
 	</div>
-	<jsp:include page="footer.jsp"></jsp:include>
-</div>
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.3/proj4-src.js"></script>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8d47821d08c14a3b647e14eafa6ab215&libraries=services"></script>
-    <script>
+	<script>
     	var menu = document.getElementById("menu");
     	menu.className="nav-link dropdown-toggle active";
     </script>
-  <script type="text/javascript">
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
+	<script type="text/javascript">
 
   var data = {};
   var key = "F612190920";
@@ -67,9 +70,12 @@
 	proj4.defs('TM128', '+proj=tmerc +lat_0=38 +lon_0=128 +ellps=bessel +x_0=400000 +y_0=600000 +k=0.9999 +towgs84=-146.43,507.89,681.46 +units=m +no_defs');
 	var map;
 	var position= [];
+	var sido=[];
+	var slideIndex = 0;
+	var oilList=["휘발유", "고급 휘발유", "실내 등유", "경유", "LPG"];
 
   $(document).ready(function(){
-// 	    loadData();
+ 	    loadData();
 	    ready();
 	});
   function movemap(x,y){
@@ -168,7 +174,7 @@
 	    $.ajax({
 		      url: "/parsing", // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
 		      contentType: "application/json; charset=utf-8", 
-		      data: {'requesturl': "http://www.opinet.co.kr/api/lowTop10.do?out=json&code="+key+"8&prodcd=B027" }, //HTTP 요청과 함께 서버로 보낼 데이터 
+		      data: {'requesturl': "http://www.opinet.co.kr/api/lowTop10.do?out=json&code="+key+"&prodcd=B027" }, //HTTP 요청과 함께 서버로 보낼 데이터 
 		      method: "GET" //HTTP 요청 메소드
 		})
 		.done(function(res){
@@ -221,7 +227,15 @@
 								      method: "GET" //HTTP 요청 메소드
 								})
 								.done(function(res){
-									data.sido = res.RESULT.OIL;
+									var index=0;
+									while(index<res.RESULT.OIL.length/5){
+										var tmp = [];
+										for(var j=0;j<5;j++){
+											tmp.push(res.RESULT.OIL[5*index+j]);
+										}
+										sido.push(tmp);
+										index+=1;
+									}
 									$.ajax({
 									      url: "/parsing", // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
 									      contentType: "application/json; charset=utf-8", 
@@ -250,6 +264,8 @@
 												})
 												.done(function(res){
 													data.avgprice = res.RESULT.OIL;
+													showSlides();
+													drawAvg();
 													
 												});	
 											});		
@@ -261,13 +277,148 @@
 				});
 			});
 		});
-
 	    
-		console.log(data);
+	    
+	    console.log(data);
 	}
-
+	function drawAvg(){
+        var ctx = document.getElementById('myChart').getContext('2d');
+        
+        var myChart = new Chart(ctx, {
+           
+            type: 'bar',
+            data: {
+                labels: ['고급휘발유', '휘발유', '경유', '등유', 'LPG'],
+                datasets: [{
+                    label: '#Price',
+                    data: [0,0,0,0,0],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                        }
+                    }]
+                }
+            }
+        });
+        var comp_data = myChart.data.datasets[0].data;
+        for(var i=0 ; i<data.avgprice.length;i++){
+           comp_data[i] =  data.avgprice[i].PRICE;
+        }
+        myChart.data.datasets[0].data = comp_data;
+        myChart.update();
+	}
+	
+	function showSlides() {
+		    var container = document.getElementById("container");
+		    container.innerHTML="";
+		    for(var index=0; index<sido.length; index++){
+		    	var card = document.createElement("div");
+		    	card.setAttribute("class","mySlides fade");
+		    	
+		    	var areanm = document.createElement("div");
+		    	areanm.setAttribute("class","numbertext");
+		    	areanm.innerText = sido[index][0].SIDONM;
+		    	card.appendChild(areanm);
+		    	
+		    	for(var j=0;j<5;j++){
+		    		var text = document.createElement("div");
+		    		text.setAttribute("calss","text");
+		    		text.innerText = oilList[j]+ " : " + sido[index][j].PRICE;
+		    		card.appendChild(text);
+		    	}
+		    	container.appendChild(card);
+		    }
+		    var slides = document.getElementsByClassName("mySlides");
+		    for (var i = 0; i < slides.length; i++) {
+		      
+		    	slides[i].style.display = "none";  
+		    }
+		    slideIndex++;
+		    if (slideIndex > slides.length) {
+		    	slideIndex = 1
+		    }    
+		    slides[slideIndex-1].style.display = "block";  
+		    setTimeout(showSlides,4000); // Change image every 2 seconds
+	}
   </script>
 
 </body>
-</html>
+<style>
+.mySlides {display: none;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: relative;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 16px;
+  padding: 8px 12px;
+  position: relative;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.active {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: slidein;
+  -webkit-animation-duration: 3.5s;
+  animation-name: slidein;
+  animation-duration: 4s;
+}
+
+@-webkit-keyframes slidein {
+  from {opacity: 1} 
+  to {opacity: 1}
+}
+
+@keyframes slidein {
+  from {opacity: 1} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px}
+}
+</style>
+	</html>
 </layoutTag:layout>
