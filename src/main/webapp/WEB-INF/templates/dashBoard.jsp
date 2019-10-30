@@ -31,15 +31,26 @@
 				<div class="col-md-4 임시클래스">
 					<canvas id="myChart" width="400" height="400"></canvas>
 				</div>
-				<div class="col-md-4 임시클래스">최근 7일 전국 일일 평균가</div>
+				<div class="col-md-4 임시클래스">최근 7일 전국 일일 평균가
+				</div>
 				<div class="col-md-4 임시클래스">최근 1주간 주간 평균가</div>
 				<div class="col-md-6 임시클래스">시도별 주유소 평균가격(현재)</div>
-				<div class="col-md-6 임시클래스  slideshow-container" id="container"></div>
+				<div class="col-md-6 임시클래스  slideshow-container" id="container"></div>	
 				<div class="col-md-6 임시클래스">이미지를 넣는다.(top10)주유소</div>
 				<div class="col-md-6 임시클래스">전국 /지역별 최저가 주유소(Top10)</div>
 				<div class="col-md-6 임시클래스">반경내 주유소</div>
 				<div class="col-md-6 임시클래스">주유소 상세정보</div>
 			</div>
+			<div>
+				<canvas id="chart_seven" ></canvas>
+			</div>
+			<div id = "chart_div1"></div>
+			<div id = "chart_div2" style= "display:none"></div>
+			<div id = "chart_div3" style= "display:none"></div>
+			<div id = "chart_div4" style= "display:none"></div>
+			<div id = "chart_div5" style= "display:none"></div>
+						
+		
 			<div class="row">
 				<div id="maplist" class="col-md-6 임시클래스" style="min-height: 500px">
 					<ul id="mlist"></ul>
@@ -58,12 +69,13 @@
     	var menu = document.getElementById("menu");
     	menu.className="nav-link dropdown-toggle active";
     </script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
 	<script type="text/javascript">
 
   var data = {};
-  var key = "F612190920";
+  var key = "F632191018";
 	var from = 'WGS84';
 	var to = 'TM128';
 	proj4.defs('WGS84', "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
@@ -78,89 +90,156 @@
  	    loadData();
 	    ready();
 	});
-  function drawChart() {
-			var chartdata1 = new google.visualization.DataTable();
-			var chartdata2 = new google.visualization.DataTable();
-			var chartdata3 = new google.visualization.DataTable();
-			var chartdata4 = new google.visualization.DataTable();
-			var chartdata5 = new google.visualization.DataTable();
+  var updateChartTicks = function(scale) { 
+      var incrementAmount = 0; var previousAmount = 0; var newTicks = []; 
+      newTicks = scale.ticks; 
+      for (x=0;x<newTicks.length;x++) { 
+       incrementAmount = (previousAmount - newTicks[x]); 
+       previousAmount = newTicks[x]; 
+      } 
+      if (newTicks.length > 2) { 
+       if (newTicks[0] - newTicks[1] != incrementAmount) { 
+        newTicks[0] = newTicks[1] + incrementAmount;      
+       } 
+      }   
+      return newTicks;
+     }; 
 
-		    chartdata1.addColumn('string', '날짜');
-		    chartdata1.addColumn('number', '휘발유');
-		    
-		    chartdata2.addColumn('string', '날짜');
-		    chartdata2.addColumn('number', '고급휘발유');
-		    		    
-		    chartdata3.addColumn('string', '날짜');
-		    chartdata3.addColumn('number', '실내등유');
-		    
-		    chartdata4.addColumn('string', '날짜');
-		    chartdata4.addColumn('number', '경유');
-		    
-		    chartdata5.addColumn('string', '날짜');
-		    chartdata5.addColumn('number', 'LPG');
+  function drawSevendays(){
+      var ctx = document.getElementById('chart_seven').getContext('2d');
+      var days =[];
+      var max =0;
+      var min =10000;
+      for(var i=0 ; i<7;i++){
+		days[i] = data.sevendays[i*5].DATE;
+		var price = data.sevendays[i*5].PRICE;
+		if(max < price) max = price;
+		if(min > price) min = price
+      }
+      var myChart = new Chart(ctx, {
+    	    type: 'line',
+          data: {
+              labels: days,
+              datasets: [
+              {
+                  label: '휘발유',
+                  data: [0,0,0,0,0,0,0],
+                  backgroundColor: [
+                      'rgba(255, 99, 132, 0.2)'
+                  ],
+                  borderColor: [
+                      'rgba(255, 99, 132, 1)'
+                  ],
+              },
+              {
+                  label: '고급휘발유',
+                  data: [0,0,0,0,0,0,0],
+                  backgroundColor: [
+                	  'rgba(54, 162, 235, 0.2)'
+                  ],
+                  borderColor: [
+                	  'rgba(54, 162, 235, 1)'
+                  ],
+              },
+              {
+                  label: '경유',
+                  data: [0,0,0,0,0,0,0],
+                  backgroundColor: [
+                	  'rgba(255, 206, 86, 0.2)'
+                  ],
+                  borderColor: [
+                	  'rgba(255, 206, 86, 1)'
+                  ],
+              },
+              {
+                  label: '등유',
+                  data: [0,0,0,0,0,0,0],
+                  backgroundColor: [
+                	  'rgba(75, 192, 192, 0.2)'
+                  ],
+                  borderColor: [
+                	  'rgba(75, 192, 192, 1)'
+                  ],
+              },
+              {
+                  label: 'LPG',
+                  data: [0,0,0,0,0,0,0],
+                  backgroundColor: [
+                	  'rgba(153, 102, 255, 0.2)'
+                  ],
+                  borderColor: [
+                	  'rgba(153, 102, 255, 1)'
+                  ],
+              }
+              ]
+          },
+          options: {
+        	  tooltips: {
+        	      mode: null
+        	    },
+              scales: {
+            	  yAxes: [{ 
+                      afterBuildTicks: function(scale) { 
+                       scale.ticks = updateChartTicks(scale); 
+                       return; 
+                      }, 
+                      beforeUpdate: function(oScale) { 
+                       return; 
+                      }, 
+                      ticks: {  
+                       beginAtZero:false, 
+                       //max:plugin.settings.maxDataValue, 
+                       maxTicksLimit: 10 
+                      } 
+                     }] 
+              },
+              onClick: function(evt, activeElements) {
+//             	  console.log(activeElements[0]);
 
-			var arr = data.sevendays;
-			console.log(arr);
-			for(var i =0; i<7; i++){
-			var tmp1 =[];
-			tmp1.push(arr[i*5].DATE);
-			var tmp2 =[];
-			tmp2.push(arr[i*5].DATE);
-			var tmp3 =[];
-			tmp3.push(arr[i*5].DATE);
-			var tmp4 =[];
-			tmp4.push(arr[i*5].DATE);
-			var tmp5 =[];
-			tmp5.push(arr[i*5].DATE);
-			for(var j=0; j<5; j++){
-					var price = arr[i*5+j].PRICE;
-				if(j==0){
-					tmp1.push(price);
-				}else if(j==1){
-					tmp2.push(price);
-				}else if(j==2){
-					tmp3.push(price);
-				}else if(j==3){
-					tmp4.push(price);
-				}else{
-					tmp5.push(price);
-				}
 
-			}
-			chartdata1.addRow(tmp1);
-			chartdata2.addRow(tmp2);
-			chartdata3.addRow(tmp3);
-			chartdata4.addRow(tmp4);
-			chartdata5.addRow(tmp5);
+//                   var elementIndex = activeElements[0]._index;
+//                   for(var i=0; i<5; i++){
+//                 	  if(elementIndex == i){
+//                 		  myChart.getDatasetMeta(i).hidden=false;
+//                 	  }else{
+//                 	      myChart.getDatasetMeta(i).hidden=true;
+//                 	  }
+//                   }
+//                   this.update();
+                }
 
-	      }
+          }
+      });
+      var comp_data = myChart.data.datasets[0].data;
+      var comp_data2 = myChart.data.datasets[1].data;
+      var comp_data3 = myChart.data.datasets[2].data;
+      var comp_data4 = myChart.data.datasets[3].data;
+      var comp_data5 = myChart.data.datasets[4].data;
 
-      var options = {
-        hAxis: {
-          title: '날짜',
-          logScale: false
-        },
-        vAxis: {
-          title: '가격',
-          logScale: false,
-      	},
-      	pointSize: 7
-      };
-	 
-      var chart1 = new google.visualization.LineChart(document.getElementById('chart_div1'));
-      var chart2 = new google.visualization.LineChart(document.getElementById('chart_div2'));
-      var chart3 = new google.visualization.LineChart(document.getElementById('chart_div3'));
-      var chart4 = new google.visualization.LineChart(document.getElementById('chart_div4'));
-      var chart5 = new google.visualization.LineChart(document.getElementById('chart_div5'));
-
-      chart1.draw(chartdata1, options);
-      chart2.draw(chartdata2, options);
-      chart3.draw(chartdata3, options);
-      chart4.draw(chartdata4, options);
-      chart5.draw(chartdata5, options);	  
-    }
-  
+      for(var i=0 ; i<7;i++){
+    	  for(var j=0; j<5; j++){
+    		  if(j==0){
+		         comp_data[i] =  data.sevendays[i*5+j].PRICE;
+    		  }else if(j==1){
+ 		         comp_data2[i] =  data.sevendays[i*5+j].PRICE;
+    		  }else if(j==2){
+  		         comp_data3[i] =  data.sevendays[i*5+j].PRICE;
+    		  }else if(j==3){
+  		         comp_data4[i] =  data.sevendays[i*5+j].PRICE;
+    		  }else if(j==4){
+  		         comp_data5[i] =  data.sevendays[i*5+j].PRICE;
+    		  }
+    	  }
+      }
+      
+//       myChart.data.datasets[0].data = comp_data;
+//       myChart.data.datasets[1].data = comp_data2;
+	  myChart.getDatasetMeta(1).hidden=true;
+	  myChart.getDatasetMeta(2).hidden=true;
+      myChart.getDatasetMeta(3).hidden=true;
+      myChart.getDatasetMeta(4).hidden=true;
+      myChart.update();
+	}
   
   function movemap(x,y){
 // 		console.log(x+" "+ y);
@@ -347,8 +426,7 @@
 												})
 												.done(function(res){
 													data.avgprice = res.RESULT.OIL;
-												      google.charts.load('current', {'packages':['line', 'corechart']});
-													  google.setOnLoadCallback(drawChart);
+													drawSevendays();
 													showSlides();
 													drawAvg();
 													
