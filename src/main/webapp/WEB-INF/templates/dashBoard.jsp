@@ -512,14 +512,6 @@
 			              
 			              // 마커를 생성합니다
 			              
-			              // var customOverlay = new daum.maps.CustomOverlay(
-			              // {
-			              //   map : map,
-			              //   position : this.position[i].latlng,
-			              //   content : this.position[i].title,	
-			              //   yAnchor : 1
-			              // });
-			              // console.log(this.position[i].latlng)
 			              var marker = new kakao.maps.Marker({
 			                  map: map, // 마커를 표시할 지도
 			                  position: position[i].latlng, // 마커를 표시할 위치

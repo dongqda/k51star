@@ -23,7 +23,7 @@ public class RootController {
 	
 	@RequestMapping("/about")
 	public void about() {}
-	
+
 	@RequestMapping("/contact")
 	public void contact() {}
 	

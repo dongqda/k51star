@@ -42,11 +42,9 @@ public class MemberController {
 		Account account = new Account();
 		try {
 			String email = principal.getName();
-			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+email);
 			account.setEmail(email);
 			return account;
 		} catch (Exception e) {
-			System.out.println("error");
 			return account;
 		}
 	}
