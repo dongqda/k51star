@@ -10,7 +10,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<!-- CSS Files -->
+<link href="css/material-dashboard.css?v=2.1.0"rel="stylesheet" />
 <link rel="stylesheet" href="css/main.css">
 
 <style type="text/css">
@@ -26,57 +29,260 @@
 <body class="text-center">
 	<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
 		<jsp:include page="header.jsp"></jsp:include>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6임시클래스">
-					<canvas id="myChart" width="400" height="400"></canvas>
-				</div>
-				<div class="col-md-6 임시클래스">최근 1주간 주간 평균가
-					<div id="avgWeek"></div>
-				</div>
-				<div class="col-md-6 임시클래스">시도별 주유소 평균가격(현재)
-					<div class="  slideshow-container" id="container"></div>
-				</div>	
-				<div class="col-md-6 임시클래스">전국 /지역별 최저가 주유소(고급휘발유)
-					<div id="finegasoline"></div>
-				</div>
-				<div class="col-md-6 임시클래스">전국 /지역별 최저가 주유소(휘발유)
-					<div id="gasoline"></div>
-				</div>
-				<div class="col-md-6 임시클래스">전국 /지역별 최저가 주유소(경유)
-					<div id="diesel"></div>
-				</div>
-				<div class="col-md-6 임시클래스">전국 /지역별 최저가 주유소(LPG)
-					<div id="lpg"></div>
-				</div>
-				<div class="col-md-6 임시클래스">주유소 상세정보</div>
-			</div>
-			<div class="col-md 임시클래스">최근 7일 전국 일일 평균가
-				<canvas id="chart_seven" ></canvas>
-			</div>
-			<div class="row">
-				<div id="maplist" class="col-md-6 임시클래스" style="min-height: 500px">
-					<ul id="mlist"></ul>
-				</div>
-				<div id="map" class="col-md-6 임시클래스" style="min-height: 500px"></div>
-			</div>
+	<div class="wrapper ">
+    <div class="main-panel">
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- 차트1개 시작 -->
+            <div class="col-sm-6">
+              <div class="card card-chart">
+                <div class="card-header card-header-warning">
+                  <canvas id="myChart1" width="400" height="400"></canvas>
+                </div>
+                <div class="card-body">
+                  <h4 class="card-title">실시간 평균 가격</h4>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <i class="material-icons">access_time</i> updated 4 minutes ago
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 차트 1개 끝 -->
+            <div class="col-sm-6">
+              <div class="card card-chart">
+                <div class="card-header card-header-success">
+                  <canvas id="myChart2" width="400" height="400"></canvas>
+                </div>
+                <div class="card-body">
+                  <h4 class="card-title">주간 평균가격</h4>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <i class="material-icons">access_time</i> campaign sent 2 days ago
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card card-chart">
+                <div class="card-header card-header-danger">
+                  <div class="slideshow-container" id="container"></div>
+                </div>
+                <div class="card-body">
+                  <h4 class="card-title">지역별 평균가격</h4>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <i class="material-icons">access_time</i> campaign sent 2 days ago
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card card-chart">
+                <div class="card-header card-header-info">
+					<div class="cardshow-container">
+						<div class="myCards">
+						  <div class="numbertext">1 / 13</div>
+						  <img src="img/card/kb-onlyyou-titanium.webp" style="width:100%" data-toggle="tooltip" title="리터당 최대 200점">
+						  <div class="text textBackg">탄탄대로 온리유 티타늄</div>
+						</div>
+						
+						<div class="myCards">
+						  <div class="numbertext">2 / 13</div>
+						  <img src="img/card/kb_tantan_auto.webp" style="width:100%" data-toggle="tooltip" title="최대 15% 할인"> 
+						  <div class="text textBackg">탄탄대로 오토</div>
+						</div>
+						
+						<div class="myCards">
+						  <div class="numbertext">3 / 13</div>
+						  <img src="img/card/kb-miz-mr-titanium.webp" style="width:100%" data-toggle="tooltip" title="리터당 100원">
+						  <div class="text textBackg">탄탄대로 Miz&Mr 티타늄</div>
+						</div>
+						
+						<div class="myCards">
+						  <div class="numbertext">4 / 13</div>
+						  <img src="img/card/shinhan_rpmplus.webp" style="width:100%" data-toggle="tooltip" title="리터당 최대 150점">
+						  <div class="text textBackg">RPM+ Platinum#</div>
+						</div>
+						
+						<div class="myCards">
+						  <div class="numbertext">5 / 13</div>
+						  <img src="img/card/shinhan-shopping.webp" style="width:100%" data-toggle="tooltip" title="10%할인">
+						  <div class="text textBackg">Shopping</div>
+						</div>
+						
+						<div class="myCards">
+						  <div class="numbertext">6 / 13</div>
+						  <img src="img/card/kb-maniai.webp" style="width:100%" data-toggle="tooltip" title="리터당 100점">
+						  <div class="text textBackg">청춘대로 마니아i</div>
+						</div>
+						
+						<div class="myCards">
+						  <div class="numbertext">7 / 13</div>
+						  <img src="img/card/lotte-likitall.webp" style="width:100%" data-toggle="tooltip" title="건당 5,000원 할인">
+						  <div class="text textBackg">Likit All</div>
+						</div>
+						
+						<div class="myCards">
+						  <div class="numbertext">8 / 13</div>
+						  <img src="img/card/citi-rewards-visa-platinum.webp" style="width:100%" data-toggle="tooltip" title="4% 적립">
+						  <div class="text textBackg">리워드</div>
+						</div>
+						
+						<div class="myCards">
+						  <div class="numbertext">9 / 13</div>
+						  <img src="img/card/nh-pie-mastercard.webp" style="width:100%" data-toggle="tooltip" title="최대 20% 할인">
+						  <div class="text textBackg">올원 파이</div>
+						</div>
+						
+						<div class="myCards">
+						  <div class="numbertext">10 / 13</div>
+						  <img src="img/card/keb_clubsk.webp" style="width:100%" data-toggle="tooltip" title="리터당 최대 150원">
+						  <div class="text textBackg">CLUB SK</div>
+						</div>
+						
+						<div class="myCards">
+						  <div class="numbertext">11 / 13</div>
+						  <img src="img/card/hana_1Q_Living.webp" style="width:100%" data-toggle="tooltip" title="합산 이용금액 10만원 시 최대 1만 머니">
+						  <div class="text textBackg">1Q Living+</div>
+						</div>
+						
+						<div class="myCards">
+						  <div class="numbertext">12 / 13</div>
+						  <img src="img/card/woori-skoil-400.webp" style="width:100%" data-toggle="tooltip" title="리터당 최대 400원">
+						  <div class="text textBackg">SK Oil 400 우리</div>
+						</div>
+						
+						<div class="myCards">
+						  <div class="numbertext">13 / 13</div>
+						  <img src="img/card/woori-soil-400.webp" style="width:100%" data-toggle="tooltip" title="리터당 최대 400원">
+						  <div class="text textBackg">S-Oil 400 우리</div>
+						</div>
+					</div>
+					<br>
+					<div style="text-align:center">
+						<a class="prev" onclick="plusCards(-1)">&#10094;</a>
+						<a class="next" onclick="plusCards(1)">&#10095;</a>
+					</div>
+                </div>
+                <div class="card-body">
+                  <h4 class="card-title">주유 할인카드</h4>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <i class="material-icons">access_time</i> campaign sent 2 days ago
+                  </div>
+                </div>
+              </div>
+            </div>
 
-		</div>
-		<jsp:include page="footer.jsp"></jsp:include>
-	</div>
+            <div class="col-sm-12">
+              <div class="card card-chart">
+                <div class="card-header card-header-warning">
+                  <canvas id="chart_seven" ></canvas>
+                </div>
+                <div class="card-body">
+                  <h4 class="card-title">최근 7일 가격변동</h4>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <i class="material-icons">access_time</i> campaign sent 2 days ago
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">전국 최저가 TOP 10</h4>
+                  <ul class="nav nav-tabs" data-tabs="tabs">
+                        <li class="nav-item">
+                          <a class="nav-link active" href="#fuel1" data-toggle="tab">고급 휘발유</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#fuel2" data-toggle="tab">휘발유 </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#fuel3" data-toggle="tab">경유</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#fuel4" data-toggle="tab">LPG</a>
+                        </li>
+                      </ul>
+                </div>
+                <div class="card-body table-responsive">
+                  <table class="table table-hover" style="color:white">
+                    <thead class="text-warning">
+                      <th>지역</th>
+                      <th>주유소</th>
+                      <th>가격</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>Dakota Rice</td>
+                        <td>$36,738</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="card">
+                <div class="card-header card-header-tabs card-header-warning">
+                  <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper">
+                      <span class="nav-tabs-title">[전국 최저가 top10]</span>
+                      
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="fuel1">
+                     	<div id="finegasoline"></div>
+                    </div>
+                    <div class="tab-pane" id="fuel2">
+                      <div id="gasoline"></div>
+                    </div>
+                    <div class="tab-pane" id="fuel3">
+                      <div id="diesel"></div>
+                    </div>
+                    <div class="tab-pane" id="fuel4">
+                      <div id="lpg"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+           		<div id="maplist" class="col-sm-6" style="min-height: 500px">
+           			<ul id="mlist"></ul>
+           		</div>
+           		<div id="map" class="col-sm-6" style="min-height: 500px"></div>
+           </div>
+           
+          </div>
+        </div>
+      </div>
+      <jsp:include page="footer.jsp"></jsp:include>
+    </div>
+  </div>
+	
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.3/proj4-src.js"></script>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8d47821d08c14a3b647e14eafa6ab215&libraries=services"></script>
-	<script>
-    	var menu = document.getElementById("menu");
-    	menu.className="nav-link dropdown-toggle active";
-    </script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
 	<script type="text/javascript">
-
+	var menu = document.getElementById("menu");
+	menu.className="nav-link dropdown-toggle active";
   var data = {};
   var key = "F632191018";
 	var from = 'WGS84';
@@ -100,6 +306,7 @@
 		};
 
   $(document).ready(function(){
+	  	$('[data-toggle="tooltip"]').tooltip();   
  	    loadData();
 	    ready();
 	});
@@ -453,20 +660,46 @@
 		}
 	}
 	function drawAvgWeek(){
-		var container = document.getElementById('avgWeek');
-		container.innerHTML="";
-		for(var i=0; i<data.avgLastWeek.length; i++){
-			var txt=document.createElement("div");
-			var key = data.avgLastWeek[i].PRODCD;
-			txt.innerText = oilList[key]+ " : " + data.avgLastWeek[i].PRICE;
-			container.appendChild(txt);
+		var ctx = document.getElementById('myChart2').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['휘발유', '고급휘발유', '등유', '경유', 'LPG'],
+                datasets: [{
+                    label: '#Price',
+                    data: [0,0,0,0,0],
+                    backgroundColor: [
+                    	'white'
+                    ],
+                    borderColor: [
+                    	'white'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                        }
+                    }]
+                }
+            }
+        });
+        
+        var comp_data = myChart.data.datasets[0].data;
+        for(var i=0; i<data.avgLastWeek.length; i++){
+           comp_data[i] =   data.avgLastWeek[i].PRICE;
 		}
+        myChart.data.datasets[0].data = comp_data;
+        myChart.update();
+		
+		
 	}
 	function drawAvg(){
-        var ctx = document.getElementById('myChart').getContext('2d');
-        
+        var ctx = document.getElementById('myChart1').getContext('2d');
         var myChart = new Chart(ctx, {
-           
             type: 'bar',
             data: {
                 labels: ['고급휘발유', '휘발유', '경유', '등유', 'LPG'],
@@ -474,18 +707,10 @@
                     label: '#Price',
                     data: [0,0,0,0,0],
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
+                    	'white'
                     ],
                     borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
+                    	'white'
                     ],
                     borderWidth: 1
                 }]
@@ -512,19 +737,17 @@
 		    var container = document.getElementById("container");
 		    container.innerHTML="";
 		    for(var index=0; index<sido.length; index++){
-		    	var card = document.createElement("div");
-		    	card.setAttribute("class","mySlides fade");
+		    	var card = document.createElement("table");
+		    	card.setAttribute("class","mySlides");
 		    	
-		    	var areanm = document.createElement("div");
-		    	areanm.setAttribute("class","numbertext");
-		    	areanm.innerText = sido[index][0].SIDONM;
+		    	var areanm = document.createElement("tr");
+		    	areanm.innerHTML = "<td colspan=\"2\" style=\"text-align:center;border-bottom:1px solid white;\">"+sido[index][0].SIDONM+"</td><hr>";
 		    	card.appendChild(areanm);
 		    	
 		    	for(var j=0;j<5;j++){
-		    		var text = document.createElement("div");
+		    		var text = document.createElement("tr");
 		    		var key = sido[index][j].PRODCD;
-		    		text.setAttribute("calss","text");
-		    		text.innerText = oilList[key]+ " : " + sido[index][j].PRICE;
+		    		text.innerHTML = "<td style=\"width:100%\">"+oilList[key]+"</td><td style=\"text-align:right;width:100%\">" + sido[index][j].PRICE+"</td>";
 		    		card.appendChild(text);
 		    	}
 		    	container.appendChild(card);
@@ -539,9 +762,37 @@
 		    	slideIndex = 1
 		    }    
 		    slides[slideIndex-1].style.display = "block";  
-		    setTimeout(showSlides,4000); // Change image every 2 seconds
+		    setTimeout(showSlides,3000); // Change image every 2 seconds
 	}
   </script>
+	<script>
+	var cardIndex = 1;
+	showCards(cardIndex);
+	
+	function plusCards(n) {
+	  showCards(cardIndex += n);
+	}
+	
+	function currentCard(n) {
+	  showCards(cardIndex = n);
+	}
+	
+	function showCards(n) {
+	  var i;
+	  var cards = document.getElementsByClassName("myCards");
+	  var dots = document.getElementsByClassName("dot");
+	  if (n > cards.length) {cardIndex = 1}    
+	  if (n < 1) {cardIndex = cards.length}
+	  for (i = 0; i < cards.length; i++) {
+	      cards[i].style.display = "none";  
+	  }
+	  for (i = 0; i < dots.length; i++) {
+	      dots[i].className = dots[i].className.replace(" active", "");
+	  }
+	  cards[cardIndex-1].style.display = "block";  
+	  dots[cardIndex-1].className += " active";
+	}
+	</script>
 
 </body>
 <style>
@@ -602,5 +853,92 @@
   .text {font-size: 11px}
 }
 </style>
-	</html>
+
+<style>
+/* card slide style */
+
+* {box-sizing: border-box}
+body {font-family: Verdana, sans-serif; margin:0}
+.myCards {display: none}
+img {vertical-align: middle;}
+
+/* Slideshow container */
+.cardshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+
+.textBackg{
+	background:rgba(0,0,0,0.3)
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+</style>
+</html>
 </layoutTag:layout>
