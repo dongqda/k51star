@@ -1,5 +1,6 @@
 package com.project.k51star.controller;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -58,5 +60,10 @@ public class CarController {
 		}
 		return "myPage";
 	}
-	
+	@RequestMapping(value="/getCarinfo", method = RequestMethod.GET)
+	public @ResponseBody CarInfoDto getKPL(Model model, Principal principal) {
+		String email = principal.getName();
+		CarInfoDto car = service.searchCarInfoByEmail(email);
+		return car;
+	}
 }
