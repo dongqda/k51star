@@ -446,9 +446,8 @@
       myChart.update();
 	}
   
-  function movemap(x,y,title){
+  function movemap(x,y){
 // 		console.log(x+" "+ y);
-	console.log(title);
       map.setCenter(new kakao.maps.LatLng(x,y));
   }
   function ready(){
@@ -500,7 +499,7 @@
 			            stationinfo.latlng = new kakao.maps.LatLng(reprojectedCoords[1],reprojectedCoords[0]);
 			            position[a] = stationinfo;
 			            var elem = document.createElement('li');
-			            elem.innerHTML = '<a style="cursor:pointer" onclick="movemap(' + reprojectedCoords[1] +','+reprojectedCoords[0] +','+stationinfo.title+');">'+stationinfo.title+'</a>';
+			            elem.innerHTML = '<a style="cursor:pointer" onclick="movemap(' + reprojectedCoords[1] +','+reprojectedCoords[0] +');">'+stationinfo.title+'</a>';
 			            document.getElementById('mlist').appendChild(elem);
 
 			          }
