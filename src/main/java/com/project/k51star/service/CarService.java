@@ -30,4 +30,8 @@ public class CarService {
 	public void insertCarInfo(Map<String,Integer> map) {
 		mapper.insertCarInfo(map);
 	}
+
+	public CarInfoDto searchCarInfoByEmail(String email) {
+		return mapper.searchCarInfoByEmail(email);
+	}
 }
