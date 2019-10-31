@@ -28,29 +28,32 @@
 		<jsp:include page="header.jsp"></jsp:include>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-4 임시클래스">
+				<div class="col-md-6임시클래스">
 					<canvas id="myChart" width="400" height="400"></canvas>
 				</div>
-				<div class="col-md-4 임시클래스">최근 7일 전국 일일 평균가
+				<div class="col-md-6 임시클래스">최근 1주간 주간 평균가
+					<div id="avgWeek"></div>
 				</div>
-				<div class="col-md-4 임시클래스">최근 1주간 주간 평균가</div>
-				<div class="col-md-6 임시클래스">시도별 주유소 평균가격(현재)</div>
-				<div class="col-md-6 임시클래스  slideshow-container" id="container"></div>	
-				<div class="col-md-6 임시클래스">이미지를 넣는다.(top10)주유소</div>
-				<div class="col-md-6 임시클래스">전국 /지역별 최저가 주유소(Top10)</div>
-				<div class="col-md-6 임시클래스">반경내 주유소</div>
+				<div class="col-md-6 임시클래스">시도별 주유소 평균가격(현재)
+					<div class="  slideshow-container" id="container"></div>
+				</div>	
+				<div class="col-md-6 임시클래스">전국 /지역별 최저가 주유소(고급휘발유)
+					<div id="finegasoline"></div>
+				</div>
+				<div class="col-md-6 임시클래스">전국 /지역별 최저가 주유소(휘발유)
+					<div id="gasoline"></div>
+				</div>
+				<div class="col-md-6 임시클래스">전국 /지역별 최저가 주유소(경유)
+					<div id="diesel"></div>
+				</div>
+				<div class="col-md-6 임시클래스">전국 /지역별 최저가 주유소(LPG)
+					<div id="lpg"></div>
+				</div>
 				<div class="col-md-6 임시클래스">주유소 상세정보</div>
 			</div>
-			<div>
+			<div class="col-md 임시클래스">최근 7일 전국 일일 평균가
 				<canvas id="chart_seven" ></canvas>
 			</div>
-			<div id = "chart_div1"></div>
-			<div id = "chart_div2" style= "display:none"></div>
-			<div id = "chart_div3" style= "display:none"></div>
-			<div id = "chart_div4" style= "display:none"></div>
-			<div id = "chart_div5" style= "display:none"></div>
-						
-		
 			<div class="row">
 				<div id="maplist" class="col-md-6 임시클래스" style="min-height: 500px">
 					<ul id="mlist"></ul>
@@ -84,7 +87,17 @@
 	var position= [];
 	var sido=[];
 	var slideIndex = 0;
-	var oilList=["휘발유", "고급 휘발유", "실내 등유", "경유", "LPG"];
+	var oilList={
+		"B027" : "휘발유", 
+		"B034" : "고급 휘발유", 
+		"C004" : "실내 등유",
+		"D047" : "경유",
+		"K015" : "LPG",
+		"diesel":"경유",
+		"finegasoline":"고급 휘발유",
+		"gasoline":"휘발유",
+		"lpg":"LPG",
+		};
 
   $(document).ready(function(){
  	    loadData();
@@ -188,26 +201,13 @@
                       }, 
                       ticks: {  
                        beginAtZero:false, 
-                       //max:plugin.settings.maxDataValue, 
                        maxTicksLimit: 10 
                       } 
                      }] 
               },
               onClick: function(evt, activeElements) {
-//             	  console.log(activeElements[0]);
 
-
-//                   var elementIndex = activeElements[0]._index;
-//                   for(var i=0; i<5; i++){
-//                 	  if(elementIndex == i){
-//                 		  myChart.getDatasetMeta(i).hidden=false;
-//                 	  }else{
-//                 	      myChart.getDatasetMeta(i).hidden=true;
-//                 	  }
-//                   }
-//                   this.update();
-                }
-
+              }
           }
       });
       var comp_data = myChart.data.datasets[0].data;
@@ -232,8 +232,6 @@
     	  }
       }
       
-//       myChart.data.datasets[0].data = comp_data;
-//       myChart.data.datasets[1].data = comp_data2;
 	  myChart.getDatasetMeta(1).hidden=true;
 	  myChart.getDatasetMeta(2).hidden=true;
       myChart.getDatasetMeta(3).hidden=true;
@@ -285,7 +283,6 @@
 				      method: "GET" //HTTP 요청 메소드
 				})
 				.done(function(res){
-// 					console.log(res);
 			          var arr = res.RESULT.OIL;
 			          var length = arr.length<10?arrlength:10;
 			          for(var a =0; a<length; a++){
@@ -293,7 +290,6 @@
 			            stationinfo.title = arr[a].OS_NM;
 			            var reprojectedCoords = proj4(to, from, [arr[a].GIS_X_COOR,arr[a].GIS_Y_COOR]);
 			            stationinfo.latlng = new kakao.maps.LatLng(reprojectedCoords[1],reprojectedCoords[0]);
-// 			            console.log(stationinfo);
 			            position[a] = stationinfo;
 			            var elem = document.createElement('li');
 			            elem.innerHTML = '<a style="cursor:pointer" onclick="movemap(' + reprojectedCoords[1] +','+reprojectedCoords[0] +');">'+stationinfo.title+'</a>';
@@ -429,7 +425,8 @@
 													drawSevendays();
 													showSlides();
 													drawAvg();
-													
+													drawAvgWeek();
+													topTenList();
 												});	
 											});		
 									});
@@ -440,9 +437,30 @@
 				});
 			});
 		});
-	    
-	    
 	    console.log(data);
+	}
+	function topTenList(){
+		for(var item in data.lowTop10){
+			var insert = document.getElementById(item);
+			var kategorie = document.createElement("div");
+			kategorie.innerText=oilList[item];
+			for(var j=0; j<10; j++){
+				var top10 = document.createElement("div");
+				top10.innerText=data.lowTop10[item][j].OS_NM + " " + data.lowTop10[item][j].PRICE + "원";
+				kategorie.appendChild(top10);
+			}
+			insert.appendChild(kategorie);
+		}
+	}
+	function drawAvgWeek(){
+		var container = document.getElementById('avgWeek');
+		container.innerHTML="";
+		for(var i=0; i<data.avgLastWeek.length; i++){
+			var txt=document.createElement("div");
+			var key = data.avgLastWeek[i].PRODCD;
+			txt.innerText = oilList[key]+ " : " + data.avgLastWeek[i].PRICE;
+			container.appendChild(txt);
+		}
 	}
 	function drawAvg(){
         var ctx = document.getElementById('myChart').getContext('2d');
@@ -504,8 +522,9 @@
 		    	
 		    	for(var j=0;j<5;j++){
 		    		var text = document.createElement("div");
+		    		var key = sido[index][j].PRODCD;
 		    		text.setAttribute("calss","text");
-		    		text.innerText = oilList[j]+ " : " + sido[index][j].PRICE;
+		    		text.innerText = oilList[key]+ " : " + sido[index][j].PRICE;
 		    		card.appendChild(text);
 		    	}
 		    	container.appendChild(card);
