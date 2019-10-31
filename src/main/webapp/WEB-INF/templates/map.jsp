@@ -86,12 +86,11 @@
 		  				if(res.email != null){
 		  					//로그인했을때
 				  			$.ajax({
-				  				url:'/getKPL',
+				  				url:'/getCarinfo',
 				  			    method: "GET"
 				  			})
 				  			.done(function(res){
-				  				KPL = res;
-		    					console.log(KPL);
+		    					console.log(res);
 				  			});
 		  				}else{
 		  					//로그인 안했을때
