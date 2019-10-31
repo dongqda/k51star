@@ -36,4 +36,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM car
 		WHERE member_id=#{id}
 	</select>
+	
+	<select id="searchKPLByEmail" parameterType="String" resultType="String">
+		SELECT
+			CI.KPL
+		FROM
+			CAR AS C 
+				LEFT OUTER JOIN 
+			CAR_INFO AS CI
+				ON	C.CAR_ID = CI.CAR_ID
+		WHERE
+			C.MEMBER_ID = (SELECT
+			A.ID
+		FROM
+			ACCOUNT AS A
+		WHERE
+			A.EMAIL LIKE #{email})
+	</select>
 </mapper>

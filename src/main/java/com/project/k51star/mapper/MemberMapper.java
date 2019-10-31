@@ -11,4 +11,5 @@ public interface MemberMapper {
     public void updateMember(Account account); 
     public void deleteMember(String email); 
     public int searchMemberById(String id);
+	public String searchKPLByEmail(String email);
 }

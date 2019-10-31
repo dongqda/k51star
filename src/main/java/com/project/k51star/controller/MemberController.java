@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.k51star.dto.Account;
 import com.project.k51star.security.AccountRepository;
@@ -36,6 +37,19 @@ public class MemberController {
 		return "myPage";
 	}
 	
+	@RequestMapping(value ="/loginCheck", method = RequestMethod.GET)
+	public @ResponseBody Account loginCheck(Model model,Principal principal) {
+		Account account = new Account();
+		try {
+			String email = principal.getName();
+			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+email);
+			account.setEmail(email);
+			return account;
+		} catch (Exception e) {
+			System.out.println("error");
+			return account;
+		}
+	}
 	
 	@RequestMapping(value="/deleteMember")
 	public String deleteMember(Principal principal,HttpSession session) {
@@ -60,5 +74,11 @@ public class MemberController {
 		memberService.updateMember(account);
 		return "redirect:/myPage";
 	}
-	
+
+	@RequestMapping(value="/getKPL", method = RequestMethod.GET)
+	public @ResponseBody float getKPL(Model model, Principal principal) {
+		String email = principal.getName();
+		float r = memberService.searchKPLByEmail(email);
+		return r;
+	}
 }
