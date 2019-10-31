@@ -43,6 +43,7 @@
 	$(document).ready(function(){
 		ready();			
 	});
+	var KPL = 0;
 	function ready(){
 		var container = document.getElementById('map');
 		 if(navigator.geolocation){
@@ -76,26 +77,27 @@
 			geocoder.coord2Address(coord.getLng(), coord.getLat(), function(result, status) {
 		    	console.log(result)
 				if (status === kakao.maps.services.Status.OK) {
-				    var area_name = result[0].address.region_1depth_name;
-				    $.ajax({
-				      url: "/change/code", // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
-				      contentType: "application/json; charset=utf-8", 
-				      data: {'area_name': area_name }, //HTTP 요청과 함께 서버로 보낼 데이터 
-				      method: "GET" //HTTP 요청 메소드
-					})
-					.done(function(res){
-						console.log(res);
-						var area_code = res;
-						$.ajax({
-							url: "http://www.opinet.co.kr/api/lowTop10.do?out=json&code=F632191018&prodcd=B027&area="+area_code,
-				            crossOrigin: true,  
-				            dataType : "json",
-						})
-						.done(function(data){
-							var result = JSON.parse(data);
-							console.log(result);
-						});
-					});
+		  			$.ajax({
+		  				url:'/loginCheck',
+		  			    method: "GET"
+		  			})
+		  			.done(function(res){
+		  				console.log(res);
+		  				if(res.email != null){
+		  					//로그인했을때
+				  			$.ajax({
+				  				url:'/getKPL',
+				  			    method: "GET"
+				  			})
+				  			.done(function(res){
+				  				KPL = res;
+		    					console.log(KPL);
+				  			});
+		  				}else{
+		  					//로그인 안했을때
+		  				}
+		  			});
+		  			console.log(KPL);
 				}
 		 	});
 			});
