@@ -274,8 +274,6 @@
   </div>
 	
 	<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.3/proj4-src.js"></script>
-	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8d47821d08c14a3b647e14eafa6ab215&libraries=services"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript"
@@ -486,7 +484,7 @@
 			    $.ajax({
 			      url: "/parsing", // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
 				      contentType: "application/json; charset=utf-8", 
-				      data: {'requesturl': "http://www.opinet.co.kr/api/aroundAll.do?code=" +key+ "&&x=+"+result[0]+"&y="+result[1]+"&radius=5000&sort=2&prodcd=B027&out=json"}, //HTTP 요청과 함께 서버로 보낼 데이터 
+				      data: {'requesturl': "http://www.opinet.co.kr/api/aroundAll.do?code=" +key+ "&x=+"+result[0]+"&y="+result[1]+"&radius=5000&sort=2&prodcd=B027&out=json"}, //HTTP 요청과 함께 서버로 보낼 데이터 
 				      method: "GET" //HTTP 요청 메소드
 				})
 				.done(function(res){
@@ -514,14 +512,6 @@
 			              
 			              // 마커를 생성합니다
 			              
-			              // var customOverlay = new daum.maps.CustomOverlay(
-			              // {
-			              //   map : map,
-			              //   position : this.position[i].latlng,
-			              //   content : this.position[i].title,	
-			              //   yAnchor : 1
-			              // });
-			              // console.log(this.position[i].latlng)
 			              var marker = new kakao.maps.Marker({
 			                  map: map, // 마커를 표시할 지도
 			                  position: position[i].latlng, // 마커를 표시할 위치
