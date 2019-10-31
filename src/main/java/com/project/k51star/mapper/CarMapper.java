@@ -18,5 +18,6 @@ public interface CarMapper {
 	public void updateCarInfo(Map<String, Integer> map);
 	//처음 등록하는 경우
 	public void insertCarInfo(Map<String, Integer> map);
+	public CarInfoDto searchCarInfoByEmail(String email);
 	
 }

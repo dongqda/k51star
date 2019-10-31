@@ -39,5 +39,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   VALUE 
 	   	(#{member_id},#{car_id})
    </insert>
-  
+  	<select id="searchCarInfoByEmail" parameterType="String" resultType="com.project.k51star.dto.CarInfoDto">
+		SELECT
+			CI.CAR_ID,
+			CI.CAR_MODEL,
+			CI.MANUFACTURER,
+			CI.FUEL,
+			CI.KPL
+		FROM
+			CAR AS C 
+				LEFT OUTER JOIN 
+			CAR_INFO AS CI
+				ON	C.CAR_ID = CI.CAR_ID
+		WHERE
+			C.MEMBER_ID = (SELECT
+			A.ID
+		FROM
+			ACCOUNT AS A
+		WHERE
+			A.EMAIL LIKE #{email})
+	</select>
 </mapper>

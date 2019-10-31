@@ -25,4 +25,9 @@ public class MemberService {
     public int searchMemberById(int id) {
     	return memberMapper.searchMemberById(id+"");
     }
+    
+    public float searchKPLByEmail(String email) {
+    	float r = Float.parseFloat(memberMapper.searchKPLByEmail(email));
+    	return r;
+    }
 }

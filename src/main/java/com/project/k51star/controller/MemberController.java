@@ -74,11 +74,4 @@ public class MemberController {
 		memberService.updateMember(account);
 		return "redirect:/myPage";
 	}
-
-	@RequestMapping(value="/getKPL", method = RequestMethod.GET)
-	public @ResponseBody float getKPL(Model model, Principal principal) {
-		String email = principal.getName();
-		float r = memberService.searchKPLByEmail(email);
-		return r;
-	}
 }
