@@ -41,7 +41,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    </insert>
   	<select id="searchCarInfoByEmail" parameterType="String" resultType="com.project.k51star.dto.CarInfoDto">
 		SELECT
-			COUNT(*) AS CT,
 			CI.CAR_ID,
 			CI.CAR_MODEL,
 			CI.MANUFACTURER,
