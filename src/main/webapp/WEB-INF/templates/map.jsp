@@ -64,6 +64,7 @@
 			"전기+휘발유":"B027",
 			};
 	var requesturl ;
+	var overlay =new kakao.maps.CustomOverlay({});
 	
 	$(document).ready(function(){
 		ready();			
@@ -96,7 +97,7 @@
 			   		position: markerPosition,
 			   		image: icon
 			   		}).setMap(map);
-	
+			    
 			    $.ajax({
 				  url:'/loginCheck',
 				  method: "GET",
@@ -128,7 +129,6 @@
 						method: "GET" //HTTP 요청 메소드
 					})
 					.done(function(res){
-						console.log(res.RESULT.OIL);
 						 stationList = res.RESULT.OIL;
 				      	
 				         for(var a in stationList){
@@ -181,18 +181,92 @@
                  map: map, // 마커를 표시할 지도
                  position: position[i].latlng, // 마커를 표시할 위치
                  title : position[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-                 image : markerImage // 마커 이미지
              });
+             
+          	// 마커에 click 이벤트를 등록합니다
+            kakao.maps.event.addListener(marker, 'click', showMarker(marker));
          }
 	}
+	function showMarker(marker){
+		return function(){
+			closeOverlay();
+			var id = marker.pd.id;
+			id = parseInt(id.substring(id.length-1,id.length),16)-1;
+			var reprojectedCoords = proj4(to, from, [stationList[id].GIS_X_COOR,stationList[id].GIS_Y_COOR]);
+		    var	iwPosition = new kakao.maps.LatLng(reprojectedCoords[1],reprojectedCoords[0]); //인포윈도우 표시 위치입니다
+			var content = '<div class="wrap">' + 
+	          '    <div class="info">' + 
+	          '        <div class="title">' + 
+	          				stationList[id].OS_NM +
+	          '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+	          '        </div>' + 
+	          '        <div class="body">' + 
+	          '            <div class="desc">' + 
+	          '                <div class="ellipsis"> 가격 : '+ 
+	          					stationList[id].PRICE +
+	          '                <div><a href="http://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
+	          '            </div>' + 
+	          '        </div>' + 
+	          '    </div>' +    
+	          '</div>';
+			 overlay =new kakao.maps.CustomOverlay({
+			        content: content,
+			    	map:map,
+			        position : iwPosition, 
+			    });
+		}
+	}
 	function movemap(a){
-		console.log(stationList[a]);
+		closeOverlay();
 		var reprojectedCoords = proj4(to, from, [stationList[a].GIS_X_COOR,stationList[a].GIS_Y_COOR]);
-	    map.setCenter(new kakao.maps.LatLng(reprojectedCoords[1],reprojectedCoords[0]));
+	    var	iwPosition = new kakao.maps.LatLng(reprojectedCoords[1],reprojectedCoords[0]); //인포윈도우 표시 위치입니다
+	    	// 커스텀 오버레이에 표시할 컨텐츠 입니다
+	    	// 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+	    	// 별도의 이벤트 메소드를 제공하지 않습니다 
+	    var content = '<div class="wrap">' + 
+	    	          '    <div class="info">' + 
+	    	          '        <div class="title">' + 
+	    	          				stationList[a].OS_NM +
+	    	          '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+	    	          '        </div>' + 
+	    	          '        <div class="body">' + 
+	    	          '            <div class="desc">' + 
+	    	          '                <div class="ellipsis"> 가격 : '+ 
+	    	          					stationList[a].PRICE +
+	    	          '                <div><a href="http://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
+	    	          '            </div>' + 
+	    	          '        </div>' + 
+	    	          '    </div>' +    
+	    	          '</div>';
+	    map.setCenter(iwPosition);
+	 	// 인포윈도우를 생성하고 지도에 표시합니다
+	    overlay =new kakao.maps.CustomOverlay({
+	        content: content,
+	    	map:map,
+	        position : iwPosition, 
+	    });
 	}
 
+ 	// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+	function closeOverlay() {
+	    overlay.setMap(null);     
+    }
 </script>
-
 </body>
+<style>
+    .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+    .wrap * {padding: 0;margin: 0;}
+    .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+    .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+    .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+    .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+    .info .close:hover {cursor: pointer;}
+    .info .body {position: relative;overflow: hidden;}
+    .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+    .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+    .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
+    .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+    .info .link {color: #5085BB;}
+</style>
 </html>
 </layoutTag:layout>
