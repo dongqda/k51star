@@ -201,33 +201,31 @@
                   <h4 class="card-title">전국 최저가 TOP 10</h4>
                   <ul class="nav nav-tabs" data-tabs="tabs">
                         <li class="nav-item">
-                          <a class="nav-link active" href="#fuel1" data-toggle="tab">고급 휘발유</a>
+                          <a class="nav-link active" href="#finegasoline" data-toggle="tab">고급 휘발유</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="#fuel2" data-toggle="tab">휘발유 </a>
+                          <a class="nav-link" href="#gasoline" data-toggle="tab">휘발유 </a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="#fuel3" data-toggle="tab">경유</a>
+                          <a class="nav-link" href="#diesel" data-toggle="tab">경유</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="#fuel4" data-toggle="tab">LPG</a>
+                          <a class="nav-link" href="#lpg" data-toggle="tab">LPG</a>
                         </li>
                       </ul>
                 </div>
                 <div class="card-body table-responsive">
-                  <table class="table table-hover" style="color:white">
-                    <thead class="text-warning">
-                      <th>지역</th>
-                      <th>주유소</th>
-                      <th>가격</th>
+                  <table class="table table-hover tab-content" style="color:white" >
+                    <thead >
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Dakota Rice</td>
-                        <td>$36,738</td>
-                      </tr>
+                    <tbody class="tab-pane active" id="finegasoline">
                     </tbody>
+                    <tbody class="tab-pane" id="gasoline">
+                    </tbody>
+                    <tbody class="tab-pane" id="diesel">
+                    </tbody>
+	                <tbody class="tab-pane" id="lpg">
+	                </tbody>
                   </table>
                 </div>
               </div>
@@ -310,7 +308,7 @@
  	    loadData();
 	    ready();
 	});
-  var updateChartTicks = function(scale) { 
+  var updateChartTicks = function(scale) {
       var incrementAmount = 0; var previousAmount = 0; var newTicks = []; 
       newTicks = scale.ticks; 
       for (x=0;x<newTicks.length;x++) { 
@@ -650,14 +648,29 @@
 	function topTenList(){
 		for(var item in data.lowTop10){
 			var insert = document.getElementById(item);
-			var kategorie = document.createElement("div");
-			kategorie.innerText=oilList[item];
+			insert.innerHTML = "<tr class='text-warning'><th style='width:20%'></th><th style='width:40%'>주유소</th><th style='width:40%'>가격</th></tr>";
 			for(var j=0; j<10; j++){
-				var top10 = document.createElement("div");
-				top10.innerText=data.lowTop10[item][j].OS_NM + " " + data.lowTop10[item][j].PRICE + "원";
-				kategorie.appendChild(top10);
+// 		    	var areanm = document.createElement("tr");
+// 		    	areanm.innerHTML = "<td colspan=\"2\" style=\"text-align:center;border-bottom:1px solid white;\">"+sido[index][0].SIDONM+"</td><hr>";
+// 		    	card.appendChild(areanm);
+// 				var kategorie = document.createElement("tr");
+// 				kategorie.innerHTML = "<td style='width:20%'>"+(j+1)+"</td><td style='width:40%'>"+data.lowTop10[item][j].OS_NM+"</td><td style='width:40%'>"+data.lowTop10[item][j].PRICE+"원</td>";
+// 				insert.appendChild(kategorie);
+
+
+				var kategorie = document.createElement("tr");
+					var num = document.createElement("td");
+					num.innerText = (j+1);
+					kategorie.appendChild(num);
+					var osnm = document.createElement("td");
+					osnm.innerText = data.lowTop10[item][j].OS_NM;
+					kategorie.appendChild(osnm);
+					var price = document.createElement("td");
+					price.innerText = data.lowTop10[item][j].PRICE+"원";
+					kategorie.appendChild(price);
+// 				top10.innerText=data.lowTop10[item][j].OS_NM + " " + data.lowTop10[item][j].PRICE + "원";
+				insert.appendChild(kategorie);
 			}
-			insert.appendChild(kategorie);
 		}
 	}
 	function drawAvgWeek(){
