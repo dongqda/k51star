@@ -204,7 +204,9 @@
 	          '            <div class="desc">' + 
 	          '                <div class="ellipsis"> 가격 : '+ 
 	          					stationList[id].PRICE +
-	          '                <div><a href="http://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
+	          '                <div><a onclick="goStation('+
+	        		  			id+
+	          ')" target="_blank" class="link">여기로 안내하기</a></div>' + 
 	          '            </div>' + 
 	          '        </div>' + 
 	          '    </div>' +    
@@ -233,7 +235,7 @@
 	    	          '            <div class="desc">' + 
 	    	          '                <div class="ellipsis"> 가격 : '+ 
 	    	          					stationList[a].PRICE +
-	    	          '                <div><a href="http://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
+	    	          '                <div><a  onclick="goStation('+a+')" target="_blank" class="link">여기로 안내하기</a></div>' + 
 	    	          '            </div>' + 
 	    	          '        </div>' + 
 	    	          '    </div>' +    
@@ -251,6 +253,10 @@
 	function closeOverlay() {
 	    overlay.setMap(null);     
     }
+ 	
+ 	function goStation(id){
+ 		console.log(stationList[id]);
+ 	}
 </script>
 </body>
 <style>
