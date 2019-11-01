@@ -25,7 +25,10 @@
 	<jsp:include page="header.jsp"></jsp:include>
 	<div class="container">
 	    <div class="row">
-	        <div class="col-md-6 임시클래스" onclick="goodStation()">가격순 top10,거리순 top10, 최적순 top10</div>
+	        
+<div class="col-md-6 임시클래스" onclick="sort('PRICE')">가격순 top10</div>
+<div class="col-md-6 임시클래스" onclick="sort('DISTANCE')">거리순 top10</div>
+<div class="col-md-6 임시클래스" onclick="sort('COST')">최적순 top10</div>
 	        <div class="col-md-6 임시클래스">주유소 상세정보
 	        	<ul id="mlist"></ul>
 	        </div>
@@ -76,7 +79,7 @@
 			           level: 4 //지도의 레벨(확대, 축소 정도)
 			        };
 	
-			    var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+			    map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 			    // 마커가 표시될 위치입니다
 			    var icon = new kakao.maps.MarkerImage(
 			              "https://image.flaticon.com/icons/svg/106/106128.svg",
@@ -127,42 +130,67 @@
 					.done(function(res){
 						console.log(res.RESULT.OIL);
 						 stationList = res.RESULT.OIL;
-				         var length = stationList.length<15?stationList.length:15;
-				         for(var a =0; a<length; a++){
-				            var stationinfo = new Object();
-				            stationinfo.title = stationList[a].OS_NM;
+				      	
+				         for(var a in stationList){
 				            var reprojectedCoords = proj4(to, from, [stationList[a].GIS_X_COOR,stationList[a].GIS_Y_COOR]);
-				            stationinfo.latlng = new kakao.maps.LatLng(reprojectedCoords[1],reprojectedCoords[0]);
-				            position[a] = stationinfo;
-				            var elem = document.createElement('li');
-				            var liItem = document.createElement('a');
-				            liItem.setAttribute('style',"cursor:pointer");
-				            liItem.setAttribute('onclick',"movemap('"+a+"');");
-				            liItem.innerText=stationinfo.title;
-				            elem.appendChild(liItem);
-				            document.getElementById('mlist').appendChild(elem);
-				          }
-				          var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-				          for (var i in position) {
-				              // 마커 이미지의 이미지 크기 입니다
-				              var imageSize = new kakao.maps.Size(24, 35); 
-				              
-				              // 마커 이미지를 생성합니다    
-				              var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-				              
-				              // 마커를 생성합니다
-				              var marker = new kakao.maps.Marker({
-				                  map: map, // 마커를 표시할 지도
-				                  position: position[i].latlng, // 마커를 표시할 위치
-				                  title : position[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-				                  image : markerImage // 마커 이미지
-				              });
+	            			
+					        var cost = 20*stationList[a].PRICE+((stationList[a].DISTANCE/1000)/KPL)*stationList[a].PRICE;
+					        stationList[a].COST = cost;
 				          }
 					});	
 				});
 			});
 		 }
 	}
+	function sort(sortingField){
+		stationList.sort(function(a,b){
+        	 return a[sortingField] -b[sortingField];
+        });
+		showList();
+	}
+	function showList(){
+		position=[];
+		var length = stationList.length>10?10:stationList.length;
+		document.getElementById('mlist').innerHTML='';
+		for(var index =0; index<length; index++){
+			 var stationinfo = new Object();
+			 stationinfo.title = stationList[index].OS_NM;
+			 var reprojectedCoords = proj4(to, from, [stationList[index].GIS_X_COOR,stationList[index].GIS_Y_COOR]);
+             stationinfo.latlng = new kakao.maps.LatLng(reprojectedCoords[1],reprojectedCoords[0]);
+             position[index] = stationinfo;
+             
+			 var elem = document.createElement('li');
+			 var liItem = document.createElement('a');
+	         liItem.setAttribute('style',"cursor:pointer");
+	         liItem.setAttribute('onclick',"movemap('"+index+"');");
+	         liItem.innerText=stationinfo.title;
+	         elem.appendChild(liItem);
+	         document.getElementById('mlist').appendChild(elem);
+		}
+		
+		var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+        for (var i in position) {
+             // 마커 이미지의 이미지 크기 입니다
+             var imageSize = new kakao.maps.Size(24, 35); 
+             
+             // 마커 이미지를 생성합니다    
+             var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+             
+             // 마커를 생성합니다
+             var marker = new kakao.maps.Marker({
+                 map: map, // 마커를 표시할 지도
+                 position: position[i].latlng, // 마커를 표시할 위치
+                 title : position[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                 image : markerImage // 마커 이미지
+             });
+         }
+	}
+	function movemap(a){
+		console.log(stationList[a]);
+		var reprojectedCoords = proj4(to, from, [stationList[a].GIS_X_COOR,stationList[a].GIS_Y_COOR]);
+	    map.setCenter(new kakao.maps.LatLng(reprojectedCoords[1],reprojectedCoords[0]));
+	}
+
 </script>
 
 </body>
