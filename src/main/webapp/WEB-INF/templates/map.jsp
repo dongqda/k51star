@@ -257,6 +257,7 @@
  	Kakao.init('9234e36a207c8d4f664ad499c1f69d08');
  	function goStation(id){
  		console.log(stationList[id]);
+ 	    if(confirm("네비게이션으로 연결됩니다.") == true){
 		var reprojectedCoords = proj4(to, from, [stationList[id].GIS_X_COOR,stationList[id].GIS_Y_COOR]);
         Kakao.Navi.start({
             name: stationList[id].OS_NM,
@@ -264,6 +265,9 @@
             y: reprojectedCoords[1],
             coordType: 'wgs84'
         });
+ 	    
+ 	    }
+
 
  	}
 </script>
