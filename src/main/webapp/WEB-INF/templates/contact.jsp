@@ -19,7 +19,7 @@
 		<jsp:include page="header.jsp"></jsp:include>
 
 		<main role="main" class="inner cover">
-		<h1 class="cover-heading">Contact</h1>
+		<h1 class="cover-heading" style="margin : 30px;">Contact</h1>
 		<div class="container">
 			<form class="form-signin" method="post" action="/mailSending">
 				<div align="center"><!-- 받는 사람 이메일 -->
@@ -29,14 +29,20 @@
 					<input type="text" name="title" size="120" style="width:100%" placeholder="제목을 입력해주세요" class="form-control" >
 				</div>
 				<p>
-					<div align="center"><!-- 내용 --> 
+					<div align="center" style="margin-bottom:10px;"><!-- 내용 --> 
 						<textarea name="content" cols="100" rows="12" style="width:100%; resize:none" placeholder="문의사항" class="form-control"></textarea>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					</div>
 				<p>
 				<div align="center">
-					<input type="submit" value="메일 보내기" class="btn btn-lg btn-secondary">
+					<input type="submit" value="메일 보내기" class="btn btn-lg btn-secondary" onclick="mailComplete()">
 				</div>
+				<script type="text/javascript">
+					function mailComplete{
+						alert("메일이 정상적으로 발송되었습니다.");
+						location.href="/";
+					}
+				</script>
 			</form>
 		</div>
 		</main>

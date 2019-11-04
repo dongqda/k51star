@@ -20,6 +20,10 @@ input[type="text"],[type="email"],[type="password"]{
   margin-bottom:10px;
 }
 
+.lead{
+	margin:30px;	
+}
+
 /*
  * Base structure
  */
