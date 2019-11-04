@@ -13,263 +13,204 @@
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 <!-- CSS Files -->
-<link href="css/material-dashboard.css?v=2.1.0"rel="stylesheet" />
 <link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/dashBoard.css">
 
 <style type="text/css">
-.임시클래스 {
-	border: 1px solid black;
-}
 
-.navbar {
-	margin-bottom: 20px;
-}
 </style>
 </head>
 <body class="text-center">
 	<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
 		<jsp:include page="header.jsp"></jsp:include>
-	<div class="wrapper ">
-    <div class="main-panel">
-      <div class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <!-- 차트1개 시작 -->
-            <div class="col-sm-6">
-              <div class="card card-chart">
-                <div class="card-header card-header-warning">
-                  <canvas id="myChart1" width="400" height="400"></canvas>
-                </div>
-                <div class="card-body">
-                  <h4 class="card-title">실시간 평균 가격</h4>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">access_time</i> updated 4 minutes ago
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- 차트 1개 끝 -->
-            <div class="col-sm-6">
-              <div class="card card-chart">
-                <div class="card-header card-header-success">
-                  <canvas id="myChart2" width="400" height="400"></canvas>
-                </div>
-                <div class="card-body">
-                  <h4 class="card-title">주간 평균가격</h4>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">access_time</i> campaign sent 2 days ago
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="card card-chart">
-                <div class="card-header card-header-danger">
-                  <div class="slideshow-container" id="container"></div>
-                </div>
-                <div class="card-body">
-                  <h4 class="card-title">지역별 평균가격</h4>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">access_time</i> campaign sent 2 days ago
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="card card-chart">
-                <div class="card-header card-header-info">
+	    <div class="row">
+	        <div class="col-sm-6">
+				<div class="card" style="width: 18rem;">
+				  <canvas id="myChart1" width="400" height="400"></canvas>
+				  <div class="card-body">
+				    <p class="card-text">실시간 평균 가격</p>
+				  </div>
+				</div>
+			</div>
+	        <div class="col-sm-6">
+				<div class="card" style="width: 18rem;">
+				  <canvas id="myChart2" width="400" height="400"></canvas>
+				  <div class="card-body">
+				    <p class="card-text">주간 평균 가격</p>
+				  </div>
+				</div>
+			</div>
+	        <div class="col-sm-6">
+				<div class="card" style="width: 18rem;">
+				  <div class="slideshow-container" id="container"></div>
+				  <div class="card-body">
+				    <p class="card-text">지역별 평균 가격</p>
+				  </div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="card" style="width: 18rem;">
 					<div class="cardshow-container">
 						<div class="myCards">
-						  <div class="numbertext">1 / 13</div>
-						  <img src="img/card/kb-onlyyou-titanium.webp" style="width:100%" data-toggle="tooltip" title="리터당 최대 200점">
-						  <div class="text textBackg">탄탄대로 온리유 티타늄</div>
+							<div class="numbertext">1 / 13</div>
+								<img src="img/card/kb-onlyyou-titanium.webp" class="cardImage" class="cardImage" data-toggle="tooltip" title="리터당 최대 200점">
+							<div class="text textBackg">탄탄대로 온리유 티타늄</div>
 						</div>
 						
 						<div class="myCards">
-						  <div class="numbertext">2 / 13</div>
-						  <img src="img/card/kb_tantan_auto.webp" style="width:100%" data-toggle="tooltip" title="최대 15% 할인"> 
-						  <div class="text textBackg">탄탄대로 오토</div>
+							<div class="numbertext">2 / 13</div>
+								<img src="img/card/kb_tantan_auto.webp" class="cardImage" data-toggle="tooltip" title="최대 15% 할인"> 
+							<div class="text textBackg">탄탄대로 오토</div>
 						</div>
 						
 						<div class="myCards">
-						  <div class="numbertext">3 / 13</div>
-						  <img src="img/card/kb-miz-mr-titanium.webp" style="width:100%" data-toggle="tooltip" title="리터당 100원">
-						  <div class="text textBackg">탄탄대로 Miz&Mr 티타늄</div>
+							<div class="numbertext">3 / 13</div>
+								<img src="img/card/kb-miz-mr-titanium.webp" class="cardImage" data-toggle="tooltip" title="리터당 100원">
+							<div class="text textBackg">탄탄대로 Miz&Mr 티타늄</div>
 						</div>
 						
 						<div class="myCards">
-						  <div class="numbertext">4 / 13</div>
-						  <img src="img/card/shinhan_rpmplus.webp" style="width:100%" data-toggle="tooltip" title="리터당 최대 150점">
-						  <div class="text textBackg">RPM+ Platinum#</div>
+							<div class="numbertext">4 / 13</div>
+								<img src="img/card/shinhan_rpmplus.webp" class="cardImage" data-toggle="tooltip" title="리터당 최대 150점">
+							<div class="text textBackg">RPM+ Platinum#</div>
 						</div>
 						
 						<div class="myCards">
-						  <div class="numbertext">5 / 13</div>
-						  <img src="img/card/shinhan-shopping.webp" style="width:100%" data-toggle="tooltip" title="10%할인">
-						  <div class="text textBackg">Shopping</div>
+							<div class="numbertext">5 / 13</div>
+								<img src="img/card/shinhan-shopping.webp" class="cardImage" data-toggle="tooltip" title="10%할인">
+							<div class="text textBackg">Shopping</div>
 						</div>
 						
 						<div class="myCards">
-						  <div class="numbertext">6 / 13</div>
-						  <img src="img/card/kb-maniai.webp" style="width:100%" data-toggle="tooltip" title="리터당 100점">
-						  <div class="text textBackg">청춘대로 마니아i</div>
+							<div class="numbertext">6 / 13</div>
+								<img src="img/card/kb-maniai.webp" class="cardImage" data-toggle="tooltip" title="리터당 100점">
+							<div class="text textBackg">청춘대로 마니아i</div>
 						</div>
 						
 						<div class="myCards">
-						  <div class="numbertext">7 / 13</div>
-						  <img src="img/card/lotte-likitall.webp" style="width:100%" data-toggle="tooltip" title="건당 5,000원 할인">
-						  <div class="text textBackg">Likit All</div>
+							<div class="numbertext">7 / 13</div>
+								<img src="img/card/lotte-likitall.webp" class="cardImage" data-toggle="tooltip" title="건당 5,000원 할인">
+							<div class="text textBackg">Likit All</div>
 						</div>
 						
 						<div class="myCards">
-						  <div class="numbertext">8 / 13</div>
-						  <img src="img/card/citi-rewards-visa-platinum.webp" style="width:100%" data-toggle="tooltip" title="4% 적립">
-						  <div class="text textBackg">리워드</div>
+							<div class="numbertext">8 / 13</div>
+								<img src="img/card/citi-rewards-visa-platinum.webp" class="cardImage" data-toggle="tooltip" title="4% 적립">
+							<div class="text textBackg">리워드</div>
 						</div>
 						
 						<div class="myCards">
-						  <div class="numbertext">9 / 13</div>
-						  <img src="img/card/nh-pie-mastercard.webp" style="width:100%" data-toggle="tooltip" title="최대 20% 할인">
-						  <div class="text textBackg">올원 파이</div>
+							<div class="numbertext">9 / 13</div>
+								<img src="img/card/nh-pie-mastercard.webp" class="cardImage" data-toggle="tooltip" title="최대 20% 할인">
+							<div class="text textBackg">올원 파이</div>
 						</div>
 						
 						<div class="myCards">
-						  <div class="numbertext">10 / 13</div>
-						  <img src="img/card/keb_clubsk.webp" style="width:100%" data-toggle="tooltip" title="리터당 최대 150원">
-						  <div class="text textBackg">CLUB SK</div>
+							<div class="numbertext">10 / 13</div>
+								<img src="img/card/keb_clubsk.webp" class="cardImage" data-toggle="tooltip" title="리터당 최대 150원">
+							<div class="text textBackg">CLUB SK</div>
 						</div>
 						
 						<div class="myCards">
-						  <div class="numbertext">11 / 13</div>
-						  <img src="img/card/hana_1Q_Living.webp" style="width:100%" data-toggle="tooltip" title="합산 이용금액 10만원 시 최대 1만 머니">
-						  <div class="text textBackg">1Q Living+</div>
+							<div class="numbertext">11 / 13</div>
+								<img src="img/card/hana_1Q_Living.webp" class="cardImage" data-toggle="tooltip" title="합산 이용금액 10만원 시 최대 1만 머니">
+							<div class="text textBackg">1Q Living+</div>
 						</div>
 						
 						<div class="myCards">
-						  <div class="numbertext">12 / 13</div>
-						  <img src="img/card/woori-skoil-400.webp" style="width:100%" data-toggle="tooltip" title="리터당 최대 400원">
-						  <div class="text textBackg">SK Oil 400 우리</div>
+							<div class="numbertext">12 / 13</div>
+								<img src="img/card/woori-skoil-400.webp" class="cardImage" data-toggle="tooltip" title="리터당 최대 400원">
+							<div class="text textBackg">SK Oil 400 우리</div>
 						</div>
 						
 						<div class="myCards">
-						  <div class="numbertext">13 / 13</div>
-						  <img src="img/card/woori-soil-400.webp" style="width:100%" data-toggle="tooltip" title="리터당 최대 400원">
-						  <div class="text textBackg">S-Oil 400 우리</div>
+							<div class="numbertext">13 / 13</div>
+								<img src="img/card/woori-soil-400.webp" class="cardImage" data-toggle="tooltip" title="리터당 최대 400원">
+							<div class="text textBackg">S-Oil 400 우리</div>
 						</div>
 					</div>
-					<br>
-					<div style="text-align:center">
-						<a class="prev" onclick="plusCards(-1)">&#10094;</a>
-						<a class="next" onclick="plusCards(1)">&#10095;</a>
+					<div class="card-body">
+						<p class="card-text">
+							<a class="prev" onclick="plusCards(-1)">&#10094;</a>
+							카드 할인 정보
+							<a class="next" onclick="plusCards(1)">&#10095;</a>
+						</p>
 					</div>
-                </div>
-                <div class="card-body">
-                  <h4 class="card-title">주유 할인카드</h4>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">access_time</i> campaign sent 2 days ago
-                  </div>
-                </div>
-              </div>
-            </div>
+				</div>
+			</div>
+	        <div class="col-sm-12 mobileHidden">
+				<div class="card">
+				  <canvas id="chart_seven" ></canvas>
+				  <div class="card-body">
+				    <p class="card-text">최근 7일 가격 변동</p>
+				  </div>
+				</div>
+			</div>		
+	        <div class="col-sm-12">
+				<div class="card ">
+					<div class="card-header"> 
+						<ul class="nav nav-tabs card-header-tabs pull-right"  id="myTab" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" id="home-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">고급 휘발유</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="profile-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">휘발유</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="contact-tab" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">경유</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="contact-tab" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false">LPG</a>
+							</li>
+						</ul>
+					</div>
+					<div class="card-body">
+						<div class="tab-content" id="myTabContent">
+							<div class="tab-pane fade show active" style="background: none;" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+								<table class="oilTable2">
+									<tbody id="finegasoline"></tbody>
+								</table>
+							</div>
+							<div class="tab-pane fade" style="background: none;" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+								<table class="oilTable2">
+									<tbody id="gasoline"></tbody>
+								</table>
+							</div>
+							<div class="tab-pane fade" style="background: none;" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
+								<table class="oilTable2">
+									<tbody id="diesel"></tbody>
+								</table>
+							</div>
+							<div class="tab-pane fade" style="background: none;" id="tab4" role="tabpanel" aria-labelledby="tab4-tab">
+								<table class="oilTable2">
+									<tbody id="lpg"></tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>		
+			<div id="maplist" class="col-sm-6 mobileHidden" style="min-height: 500px">
+				<div class="card" style="width: 18rem;">
+					<div class="card-header" style="background: white;color:black">
+						반경 내 TOP10
+					</div>
+					<ul class="list-group list-group-flush" id="mlist"></ul>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="card" style="width: 18rem;">
+					<div id="map" style="min-height:500px"></div>
+					<div class="card-body">
+						<p class="card-text desktopHidden">반경 내 Top 10</p>
+					</div>
+				</div>
+			</div>
+	</div>
+	<!-- 테스트중 -->
+	<jsp:include page="footer.jsp"></jsp:include>
+</div>
 
-            <div class="col-sm-12">
-              <div class="card card-chart">
-                <div class="card-header card-header-warning">
-                  <canvas id="chart_seven" ></canvas>
-                </div>
-                <div class="card-body">
-                  <h4 class="card-title">최근 7일 가격변동</h4>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">access_time</i> campaign sent 2 days ago
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-12">
-              <div class="card">
-                <div class="card-header card-header-primary">
-                  <h4 class="card-title">전국 최저가 TOP 10</h4>
-                  <ul class="nav nav-tabs" data-tabs="tabs">
-                        <li class="nav-item">
-                          <a class="nav-link active" href="#finegasoline" data-toggle="tab">고급 휘발유</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#gasoline" data-toggle="tab">휘발유 </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#diesel" data-toggle="tab">경유</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#lpg" data-toggle="tab">LPG</a>
-                        </li>
-                      </ul>
-                </div>
-                <div class="card-body table-responsive">
-                  <table class="table table-hover tab-content" style="color:white" >
-                    <thead >
-                    </thead>
-                    <tbody class="tab-pane active" id="finegasoline">
-                    </tbody>
-                    <tbody class="tab-pane" id="gasoline">
-                    </tbody>
-                    <tbody class="tab-pane" id="diesel">
-                    </tbody>
-	                <tbody class="tab-pane" id="lpg">
-	                </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-12">
-              <div class="card">
-                <div class="card-header card-header-tabs card-header-warning">
-                  <div class="nav-tabs-navigation">
-                    <div class="nav-tabs-wrapper">
-                      <span class="nav-tabs-title">[전국 최저가 top10]</span>
-                      
-                    </div>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="tab-content">
-                    <div class="tab-pane active" id="fuel1">
-                     	<div id="finegasoline"></div>
-                    </div>
-                    <div class="tab-pane" id="fuel2">
-                      <div id="gasoline"></div>
-                    </div>
-                    <div class="tab-pane" id="fuel3">
-                      <div id="diesel"></div>
-                    </div>
-                    <div class="tab-pane" id="fuel4">
-                      <div id="lpg"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-           		<div id="maplist" class="col-sm-6" style="min-height: 500px">
-           			<ul id="mlist"></ul>
-           		</div>
-           		<div id="map" class="col-sm-6" style="min-height: 500px"></div>
-           </div>
-           
-          </div>
-        </div>
-      </div>
-      <jsp:include page="footer.jsp"></jsp:include>
-    </div>
-  </div>
 	
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8d47821d08c14a3b647e14eafa6ab215&libraries=services"></script>
@@ -495,6 +436,7 @@
 			            stationinfo.latlng = new kakao.maps.LatLng(reprojectedCoords[1],reprojectedCoords[0]);
 			            position[a] = stationinfo;
 			            var elem = document.createElement('li');
+			            elem.setAttribute("class","list-group-item");
 			            elem.innerHTML = '<a style="cursor:pointer" onclick="movemap(' + reprojectedCoords[1] +','+reprojectedCoords[0] +');">'+stationinfo.title+'</a>';
 			            document.getElementById('mlist').appendChild(elem);
 
@@ -637,7 +579,7 @@
 	function topTenList(){
 		for(var item in data.lowTop10){
 			var insert = document.getElementById(item);
-			insert.innerHTML = "<tr class='text-warning'><th style='width:20%'></th><th style='width:40%'>주유소</th><th style='width:40%'>가격</th></tr>";
+			insert.innerHTML = "<tr class='text-warning mobileHidden'><th scope='col' style='width:20%'>순위</th><th scope='col' style='width:60%'>주유소</th><th scope='col' style='width:20%'>가격</th></tr>";
 			for(var j=0; j<10; j++){
 // 		    	var areanm = document.createElement("tr");
 // 		    	areanm.innerHTML = "<td colspan=\"2\" style=\"text-align:center;border-bottom:1px solid white;\">"+sido[index][0].SIDONM+"</td><hr>";
@@ -649,12 +591,15 @@
 
 				var kategorie = document.createElement("tr");
 					var num = document.createElement("td");
+					num.setAttribute("data-label","순위");
 					num.innerText = (j+1);
 					kategorie.appendChild(num);
 					var osnm = document.createElement("td");
+					osnm.setAttribute("data-label","주유소");
 					osnm.innerText = data.lowTop10[item][j].OS_NM;
 					kategorie.appendChild(osnm);
 					var price = document.createElement("td");
+					price.setAttribute("data-label","가격");
 					price.innerText = data.lowTop10[item][j].PRICE+"원";
 					kategorie.appendChild(price);
 // 				top10.innerText=data.lowTop10[item][j].OS_NM + " " + data.lowTop10[item][j].PRICE + "원";
@@ -672,10 +617,10 @@
                     label: '#Price',
                     data: [0,0,0,0,0],
                     backgroundColor: [
-                    	'white'
+                    	'white','white','white','white','white'
                     ],
                     borderColor: [
-                    	'white'
+                    	'white','white','white','white','white'
                     ],
                     borderWidth: 1
                 }]
@@ -710,10 +655,10 @@
                     label: '#Price',
                     data: [0,0,0,0,0],
                     backgroundColor: [
-                    	'white'
+                    	'white','white','white','white','white'
                     ],
                     borderColor: [
-                    	'white'
+                    	'white','white','white','white','white'
                     ],
                     borderWidth: 1
                 }]
@@ -744,7 +689,7 @@
 		    	card.setAttribute("class","mySlides");
 		    	
 		    	var areanm = document.createElement("tr");
-		    	areanm.innerHTML = "<td colspan=\"2\" style=\"text-align:center;border-bottom:1px solid white;\">"+sido[index][0].SIDONM+"</td><hr>";
+		    	areanm.innerHTML = "<tr colspan=\"2\"><th class='text-warning' scope='col'  style=\"text-align:center;border-bottom:1px solid white;\">"+sido[index][0].SIDONM+"</th></tr>";
 		    	card.appendChild(areanm);
 		    	
 		    	for(var j=0;j<5;j++){
@@ -765,7 +710,7 @@
 		    	slideIndex = 1
 		    }    
 		    slides[slideIndex-1].style.display = "block";  
-		    setTimeout(showSlides,3000); // Change image every 2 seconds
+		    setTimeout(showSlides,300000); // Change image every 2 seconds
 	}
   </script>
 	<script>
@@ -805,7 +750,7 @@
 .slideshow-container {
   max-width: 1000px;
   position: relative;
-  margin: auto;
+  margin: 10 10 30 10;
 }
 
 /* Caption text */
