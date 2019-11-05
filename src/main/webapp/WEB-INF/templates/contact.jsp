@@ -19,7 +19,8 @@
 		<jsp:include page="header.jsp"></jsp:include>
 
 		<main role="main" class="inner cover">
-		<h1 class="cover-heading" style="margin : 30px;">Contact</h1>
+		<h1 class="cover-heading">Contact</h1>
+		<br>
 		<div class="container">
 			<form class="form-signin" method="post" action="/mailSending">
 				<div align="center"><!-- 받는 사람 이메일 -->
@@ -34,7 +35,7 @@
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					</div>
 				<p>
-				<div align="center">
+				<div align="center" style="margin-bottom:10px;">
 					<input type="submit" value="메일 보내기" class="btn btn-lg btn-secondary" onclick="mailComplete()">
 				</div>
 				<script type="text/javascript">
