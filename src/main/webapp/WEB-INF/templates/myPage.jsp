@@ -34,7 +34,6 @@ $(document).ready(function(){
 	<jsp:include page="header.jsp"></jsp:include>
 	<main role="main" class="inner cover">
 		<div id="flip" class="btn btn-lg btn-secondary" style="width: 100%;margin-bottom:10px">자동차 등록</div>
-			<input type="hidden" name="email" value="${user.email}"/>
 			<div id="panel" style="margin-bottom:10px;"><div>
 				<div class="form-group">
 				  <select class="form-control" name="fuel" id="feulList">
@@ -58,7 +57,7 @@ $(document).ready(function(){
 			<label for="inputPassword" class="sr-only">Password</label>
 			<input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" value="" required="required">
 			<input type="hidden" name="role" value="ROLE_USER" />
-			<input class="btn btn-lg btn-secondary" style="padding: .3rem 1rem;" type="submit" data-toggle="modal" data-target="#myModal2" value="수정완료"/>
+			<input class="btn btn-lg btn-secondary" style="padding: .3rem 1rem;" type="button" onclick="edit()" value="수정완료"/>
 			<input class="btn btn-lg btn-secondary" style="padding: .3rem 1rem;" type="reset" value="정정"/>
 			<hr style="background:white">
 			<a data-toggle="modal" data-target="#myModal1" style="border: 3px solid white;padding: 5 10 5 10;">탈퇴하기</a>
@@ -119,6 +118,17 @@ $(document).ready(function(){
 	var oldVal="";
 
   	$(document).ready(function(){
+  		$.ajax({
+  			url:'/getCarinfo',
+  			method:"GET",
+  		}).done(function(result){
+  				var exist = document.getElementById("search");
+  			if(result.ct==0){
+  				exist.placeholder="등록 할 차량명을 입력하세요."
+  			}else{
+  				exist.placeholder=result.car_model;
+  			}
+  		})
 	  $.ajax({
 	    	url:'/car/fuel',
 		    method: "GET",
@@ -189,6 +199,30 @@ $(document).ready(function(){
 	  		console.log(res)
 	  	})
   	});
+  	
+  	function edit(){
+  		var password = document.getElementById("inputPassword");
+  		var name = document.getElementById("inputName");
+
+  		if(password.value=="" || name.value==""){
+  			alert("이름, 비밀번호 모두 입력하세요.");
+  		}else{
+  			$.ajax({
+  				url:"/updateMember",
+  				contentType: "application/json; charset=utf-8", 
+  				data:{
+  					'password':password.value,
+  					'name':name.value
+  				},
+  				method: "GET",
+  			    dataType: "json",
+  			})
+  			.done(function(res){
+  				$("#myModal2").modal("show");
+  			});
+  		}
+  		 //data-target="#myModal2"
+  	}
   	
   	function listshow(){
 	  var list = document.getElementById("carList");
