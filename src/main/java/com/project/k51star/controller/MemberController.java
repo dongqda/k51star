@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -57,19 +58,19 @@ public class MemberController {
 		return "redirect:/deleteMessage";
 	}
 	
-	@RequestMapping(value="/updateMember")
-	public String updateMember(Principal principal,HttpServletRequest request) {
+	@RequestMapping(value="/updateMember", method=RequestMethod.GET)
+	@ResponseBody
+	public Account updateMember(Principal principal, @Validated String name, @Validated String password) {
 		String email = principal.getName();
-		String name = request.getParameter("name");
-		String password = request.getParameter("password");
-		
+		String ename = name;
+		String epassword = password;
 		Account account = new Account();
 		
 		account.setEmail(email);
-		account.setName(name);
+		account.setName(ename);
 		//암호화
-		account.setPassword(passwordEncoder.encode(password));
+		account.setPassword(passwordEncoder.encode(epassword));
 		memberService.updateMember(account);
-		return "redirect:/myPage";
+		return account;
 	}
 }
