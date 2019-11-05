@@ -3,6 +3,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
 }
+
 group = 'com.project'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
@@ -36,7 +37,7 @@ dependencies {
 	
 	
 	runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
-//	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
