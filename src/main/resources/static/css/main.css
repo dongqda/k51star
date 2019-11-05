@@ -1,4 +1,25 @@
 
+
+.mobileHidden{
+   display:none;
+}
+
+@media screen and (min-width: 768px) {
+    .mobileHidden{
+       display:block;
+    }
+}
+
+.desktopHidden{
+   display:none;
+}
+
+@media screen and (max-width: 768px) {
+    .desktopHidden{
+       display:block;
+    }
+}
+
 /* Links */
 a,
 a:focus,
@@ -21,7 +42,7 @@ input[type="text"],[type="email"],[type="password"]{
 }
 
 .lead{
-	margin:30px;	
+   margin:30px;   
 }
 
 /*
@@ -42,7 +63,7 @@ body {
 }
 
 main{
-	margin:auto;
+   margin:auto;
 }
 
 .cover-container {
