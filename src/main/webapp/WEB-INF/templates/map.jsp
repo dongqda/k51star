@@ -11,12 +11,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/main.css">
 <style type="text/css">
-.임시클래스{
- border:1px solid black;
-}
-
-.navbar{
-	margin-bottom:20px;
+.oilInfo_p{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 200px;
+  height: 30px;
 }
 </style>
 </head>
@@ -25,14 +25,42 @@
 	<jsp:include page="header.jsp"></jsp:include>
 	<div class="container">
 	    <div class="row">
-	        
-<div class="col-md-6 임시클래스" onclick="sort('PRICE')">가격순 top10</div>
-<div class="col-md-6 임시클래스" onclick="sort('DISTANCE')">거리순 top10</div>
-<div class="col-md-6 임시클래스" onclick="sort('COST')">최적순 top10</div>
-	        <div class="col-md-6 임시클래스">주유소 상세정보
-	        	<ul id="mlist"></ul>
-	        </div>
-	        <div id="map" class="col-md-12 임시클래스" style="min-height:500px"></div>
+			<div class="col-sm-12">
+				<div class="card ">
+					<div class="card-header" style="background: #444">
+						<ul class="nav nav-tabs card-header-tabs pull-right"  id="myTab" role="tablist">
+							<li class="nav-item">
+								<a style="padding: 10px;" class="nav-link active" id="home-tab" data-toggle="tab" href="#tab" role="tab" aria-controls="tab" aria-selected="true" onclick="sort('PRICE')">가격 Top10</a>
+							</li>
+							<li class="nav-item">
+								<a style="padding: 10px;" class="nav-link" id="profile-tab" data-toggle="tab" href="#tab" role="tab" aria-controls="tab" aria-selected="false" onclick="sort('DISTANCE')">거리 Top10</a>
+							</li>
+							<li class="nav-item">
+								<a style="padding: 10px;" class="nav-link" id="contact-tab" data-toggle="tab" href="#tab" role="tab" aria-controls="tab" aria-selected="false" onclick="sort('COST')">최적 Top10</a>
+							</li>
+						</ul>
+					</div>
+					<div class="card-body">
+						<div class="tab-content" id="myTabContent">
+							<div class="tab-pane fade show active" style="background: none;" id="tab" role="tabpanel" aria-labelledby="tab-tab">
+				                <div class="card">
+				                  <ul class="list-group list-group-flush" id="mlist" style="=list-style: none;"></ul>
+				                </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	    
+	    
+	    
+<!-- 			<div class="col-md-6 임시클래스" onclick="sort('PRICE')">가격순 top10</div> -->
+<!-- 			<div class="col-md-6 임시클래스" onclick="sort('DISTANCE')">거리순 top10</div> -->
+<!-- 			<div class="col-md-6 임시클래스" onclick="sort('COST')">최적순 top10</div> -->
+<!-- 	        <div class="col-md-6 임시클래스">주유소 상세정보 -->
+<!-- 	        	<ul id="mlist"></ul> -->
+<!-- 	        </div> -->
+	        <div id="map" class="col-md-12 임시클래스" style="min-height:500px;margin: 20px;"></div>
 	    </div>
 	</div>
 	<jsp:include page="footer.jsp"></jsp:include>
@@ -161,7 +189,8 @@
              
 			 var elem = document.createElement('li');
 			 var liItem = document.createElement('a');
-	         liItem.setAttribute('style',"cursor:pointer");
+	         liItem.setAttribute('style',"cursor:pointer;background: none;color:black");
+	         liItem.setAttribute('class',"list-group-item");
 	         liItem.setAttribute('onclick',"movemap('"+index+"');");
 	         liItem.innerText=stationinfo.title;
 	         elem.appendChild(liItem);
@@ -195,18 +224,17 @@
 			var reprojectedCoords = proj4(to, from, [stationList[id].GIS_X_COOR,stationList[id].GIS_Y_COOR]);
 		    var	iwPosition = new kakao.maps.LatLng(reprojectedCoords[1],reprojectedCoords[0]); //인포윈도우 표시 위치입니다
 			var content = '<div class="wrap">' + 
-	          '    <div class="info">' + 
-	          '        <div class="title">' + 
+	          '    <div class="info" style="border: none;padding: 5px;background:#333">' + 
+	          '        <div class="title" style="background: #333;"><p class="oilInfo_p">' + 
 	          				stationList[id].OS_NM +
-	          '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+	          '            </p><div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
 	          '        </div>' + 
-	          '        <div class="body">' + 
-	          '            <div class="desc">' + 
-	          '                <div class="ellipsis"> 가격 : '+ 
-	          					stationList[id].PRICE +
-	          '                <div><a onclick="goStation('+
-	        		  			id+
-	          ')" target="_blank" class="link">여기로 안내하기</a></div>' + 
+	          '        <div class="body" style="padding: 10px;background:#333">' + 
+	          '            <div class="ellipsis" style="font-size: 20px;"> 가격 : '+ 
+							stationList[id].PRICE +
+			  '				<div><a style="color: black;padding: 0 10 0 10;" onclick="goStation('+
+			  					id+		  
+	          '				)" target="_blank" class="link btn btn-lg btn-secondary">여기로 안내하기</a></div>' + 
 	          '            </div>' + 
 	          '        </div>' + 
 	          '    </div>' +    
@@ -226,16 +254,16 @@
 	    	// 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
 	    	// 별도의 이벤트 메소드를 제공하지 않습니다 
 	    var content = '<div class="wrap">' + 
-	    	          '    <div class="info">' + 
-	    	          '        <div class="title">' + 
+	    	          '    <div class="info" style="border: none;padding: 5px;background:#333">' + 
+	    	          '        <div class="title" style="background: #333;"><p class="oilInfo_p">' + 
 	    	          				stationList[a].OS_NM +
-	    	          '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+	    	          '            </p><div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
 	    	          '        </div>' + 
-	    	          '        <div class="body">' + 
+	    	          '        <div class="body" style="padding: 10px;background:#333">' + 
 	    	          '            <div class="desc">' + 
-	    	          '                <div class="ellipsis"> 가격 : '+ 
+	    	          '                <div class="ellipsis" style="font-size: 20px;"> 가격 : '+ 
 	    	          					stationList[a].PRICE +
-	    	          '                <div><a  onclick="goStation('+a+')" target="_blank" class="link">여기로 안내하기</a></div>' + 
+	    	          '                <div><a style="color: black;padding: 0 10 0 10;"  onclick="goStation('+a+')" target="_blank" class="link btn btn-lg btn-secondary">여기로 안내하기</a></div>' + 
 	    	          '            </div>' + 
 	    	          '        </div>' + 
 	    	          '    </div>' +    
@@ -256,7 +284,6 @@
  	
  	Kakao.init('9234e36a207c8d4f664ad499c1f69d08');
  	function goStation(id){
- 		console.log(stationList[id]);
  	    if(confirm("네비게이션으로 연결됩니다.") == true){
 		var reprojectedCoords = proj4(to, from, [stationList[id].GIS_X_COOR,stationList[id].GIS_Y_COOR]);
         Kakao.Navi.start({
@@ -277,11 +304,11 @@
     .wrap * {padding: 0;margin: 0;}
     .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
     .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
-    .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+    .info .title {padding: 5px 0 0 10px;height: 35px;background: #333;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
     .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
     .info .close:hover {cursor: pointer;}
     .info .body {position: relative;overflow: hidden;}
-    .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+    .info .desc {position: relative;height: 75px;}
     .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
     .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
     .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
