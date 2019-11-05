@@ -11,24 +11,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT
 		*
 		FROM
-		ACCOUNT
+		account
 		WHERE
-		EMAIL=#{email}
+		email=#{email}
 	</select>
 
 	<update id="updateMember" parameterType="com.project.k51star.dto.Account">
-		UPDATE ACCOUNT 
+		UPDATE account 
 		SET 
-		NAME=#{name}
-		,PASSWORD=#{password}
+		name=#{name}
+		,password=#{password}
 		WHERE
-		EMAIL= #{email} ;
+		email= #{email} ;
 	</update>
 
 	<delete id="deleteMember" parameterType="java.lang.String">
-		DELETE FROM ACCOUNT
+		DELETE FROM account
 		WHERE 
-		EMAIL=#{email};
+		email=#{email};
 	</delete>
 	
 	<select id="searchMemberById" parameterType="String" resultType="Integer">

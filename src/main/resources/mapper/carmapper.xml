@@ -48,16 +48,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			CI.FUEL,
 			CI.KPL
 		FROM
-			CAR AS C 
+			car AS C 
 				LEFT OUTER JOIN 
-			CAR_INFO AS CI
-				ON	C.CAR_ID = CI.CAR_ID
+			car_info AS CI
+				ON	C.CAR_ID = CI.car_id
 		WHERE
-			C.MEMBER_ID = (SELECT
+			C.member_id = (SELECT
 			A.ID
 		FROM
-			ACCOUNT AS A
+			account AS A
 		WHERE
-			A.EMAIL LIKE #{email})
+			A.email LIKE #{email})
 	</select>
 </mapper>
