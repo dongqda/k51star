@@ -576,7 +576,7 @@
 		});
 	    console.log(data);
 	}
-	function topTenList(){
+	 function topTenList(){
 		for(var item in data.lowTop10){
 			var insert = document.getElementById(item);
 			insert.innerHTML = "<tr class='text-warning mobileHidden'><th scope='col' style='width:20%'>순위</th><th scope='col' style='width:60%'>주유소</th><th scope='col' style='width:20%'>가격</th></tr>";
@@ -589,11 +589,17 @@
 // 				insert.appendChild(kategorie);
 
 
-				var kategorie = document.createElement("tr");
+					var kategorie = document.createElement("tr");
 					var num = document.createElement("td");
 					num.setAttribute("data-label","순위");
 					num.innerText = (j+1);
 					kategorie.appendChild(num);
+					var area = document.createElement("td");
+					area.setAttribute("data-label","지역");
+					var tmparea = data.lowTop10[item][j].VAN_ADR;
+					tmparea = tmparea.split(' ')[0];
+					area.innerText = tmparea;
+					kategorie.appendChild(area);
 					var osnm = document.createElement("td");
 					osnm.setAttribute("data-label","주유소");
 					osnm.innerText = data.lowTop10[item][j].OS_NM;
@@ -602,10 +608,14 @@
 					price.setAttribute("data-label","가격");
 					price.innerText = data.lowTop10[item][j].PRICE+"원";
 					kategorie.appendChild(price);
-// 				top10.innerText=data.lowTop10[item][j].OS_NM + " " + data.lowTop10[item][j].PRICE + "원";
-				insert.appendChild(kategorie);
+					insert.appendChild(kategorie);
 			}
 		}
+	}
+	var getArea  = function(x,y){
+		return new Promise(function(){
+			
+		} )
 	}
 	function drawAvgWeek(){
 		var ctx = document.getElementById('myChart2').getContext('2d');
