@@ -8,6 +8,7 @@ class K51starApplicationTests {
 
 	@Test
 	void contextLoads() {
+		System.out.println("test");
 	}
 
 }
