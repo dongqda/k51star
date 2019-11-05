@@ -1,17 +1,16 @@
 package com.project.k51star;
 
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.project.k51star.dto.Account;
 import com.project.k51star.security.AccountRepository;
 
 @SpringBootApplication
-public class K51starApplication {
+public class K51starApplication extends SpringBootServletInitializer  {
 
 	public static void main(String[] args) {
 		SpringApplication.run(K51starApplication.class, args);
@@ -22,6 +21,12 @@ public class K51starApplication {
    
 	@Autowired
 	PasswordEncoder passwordEncoder;
+	
+	@Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(K51starApplication.class);
+    }
+
 	
 //    @Bean
 //    InitializingBean insertFixtureUsers(){
