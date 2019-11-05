@@ -23,7 +23,7 @@
 <body class="text-center">
 	<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
 		<jsp:include page="header.jsp"></jsp:include>
-	    <div class="row">
+	    <div class="row" style="background:#333;">
 	        <div class="col-sm-6">
 				<div class="card" style="width: 18rem;">
 				  <canvas id="myChart1" width="400" height="400"></canvas>
@@ -579,7 +579,7 @@
 	 function topTenList(){
 		for(var item in data.lowTop10){
 			var insert = document.getElementById(item);
-			insert.innerHTML = "<tr class='text-warning mobileHidden'><th scope='col' style='width:20%'>순위</th><th scope='col' style='width:60%'>주유소</th><th scope='col' style='width:20%'>가격</th></tr>";
+// 			insert.innerHTML = "<tr class='text-warning mobileHidden'><th scope='col' style='width:20%'>순위</th><th scope='col' style='width:60%'>주유소</th><th scope='col' style='width:20%'>가격</th></tr>";
 			for(var j=0; j<10; j++){
 // 		    	var areanm = document.createElement("tr");
 // 		    	areanm.innerHTML = "<td colspan=\"2\" style=\"text-align:center;border-bottom:1px solid white;\">"+sido[index][0].SIDONM+"</td><hr>";
@@ -588,7 +588,7 @@
 // 				kategorie.innerHTML = "<td style='width:20%'>"+(j+1)+"</td><td style='width:40%'>"+data.lowTop10[item][j].OS_NM+"</td><td style='width:40%'>"+data.lowTop10[item][j].PRICE+"원</td>";
 // 				insert.appendChild(kategorie);
 
-
+					
 					var kategorie = document.createElement("tr");
 					var num = document.createElement("td");
 					num.setAttribute("data-label","순위");
@@ -699,13 +699,13 @@
 		    	card.setAttribute("class","mySlides");
 		    	
 		    	var areanm = document.createElement("tr");
-		    	areanm.innerHTML = "<tr colspan=\"2\"><th class='text-warning' scope='col'  style=\"text-align:center;border-bottom:1px solid white;\">"+sido[index][0].SIDONM+"</th></tr>";
+		    	areanm.innerHTML = "<tr colspan=\"2\"><th class='text-warning' scope='col' colspan='2'  style=\"text-align:center;font-size: 15px;\">"+sido[index][0].SIDONM+"</th></tr>";
 		    	card.appendChild(areanm);
 		    	
 		    	for(var j=0;j<5;j++){
 		    		var text = document.createElement("tr");
 		    		var key = sido[index][j].PRODCD;
-		    		text.innerHTML = "<td style=\"width:100%\">"+oilList[key]+"</td><td style=\"text-align:right;width:100%\">" + sido[index][j].PRICE+"</td>";
+		    		text.innerHTML = "<td style=\"width:100%;color:white\">"+oilList[key]+"</td><td style=\"text-align:right;width:100%;color:white\">" + sido[index][j].PRICE+"</td>";
 		    		card.appendChild(text);
 		    	}
 		    	container.appendChild(card);
