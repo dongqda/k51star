@@ -1,6 +1,3 @@
-/*
- * Globals
- */
 
 /* Links */
 a,
@@ -19,6 +16,13 @@ a:hover {
   border: .05rem solid #fff;
 }
 
+input[type="text"],[type="email"],[type="password"]{
+  margin-bottom:10px;
+}
+
+.lead{
+	margin:30px;	
+}
 
 /*
  * Base structure
@@ -36,6 +40,10 @@ body {
   color: #fff;
   text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
   box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+}
+
+main{
+	margin:auto;
 }
 
 .cover-container {
@@ -85,15 +93,27 @@ body {
   }
 }
 
+/* form border white */
+#whiteForm{
+  border:3px solid white;
+  padding:50px;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  #whiteForm{
+    border:none;
+    padding:0px;
+  }
+}
 
 /*
  * Cover
  */
-.cover {
+/* .cover {
   padding: 0 1.5rem;
-}
+} */
 .cover .btn-lg {
-  padding: .75rem 1.25rem;
+  /* padding: .75rem 1.25rem; */
   font-weight: 700;
 }
 
