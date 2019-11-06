@@ -2,9 +2,7 @@
  최적 주유소 길안내 서비스
 
 ## 홍보영상
-<iframe width="560" height="315" src="https://www.youtube.com/embed/gGkLFVYjUiE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-[![Video Label](http://img.youtube.com/vi/gGkLFVYjUiE/0.jpg)](https://www.youtube.com/embed/gGkLFVYjUiE) Video Label
-[![Video Label](http://img.youtube.com/vi/gGkLFVYjUiE/0.jpg)]
+<iframe src="https://giphy.com/embed/TGvDB94Bjen8fQSv54" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/TGvDB94Bjen8fQSv54">via GIPHY</a></p>
 
 ## INDEX
 
