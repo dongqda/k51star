@@ -3,7 +3,7 @@
 
 ## 홍보영상
 <iframe width="560" height="315" src="https://www.youtube.com/embed/gGkLFVYjUiE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-[![Video Label](http://img.youtube.com/vi/embed/gGkLFVYjUiE/0.jpg)](https://www.youtube.com/embed/gGkLFVYjUiE) Video Label
+[![Video Label](http://img.youtube.com/vi/gGkLFVYjUiE/0.jpg)](https://www.youtube.com/embed/gGkLFVYjUiE) Video Label
 
 ## INDEX
 
