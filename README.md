@@ -2,7 +2,7 @@
  최적 주유소 길안내 서비스
 
 ## Video
-![Semantic description of image](https://media.giphy.com/media/cKWYYqUS9cVQaooIPQ/giphy-downsized-large.gif "Image Title")
+![Semantic description of image](https://media.giphy.com/media/cKWYYqUS9cVQaooIPQ/source.mov "Image Title")
 
 ## INDEX
 
