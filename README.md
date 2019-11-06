@@ -2,8 +2,7 @@
  최적 주유소 길안내 서비스
 
 ## 홍보영상
-<iframe src="https://giphy.com/embed/TGvDB94Bjen8fQSv54" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/TGvDB94Bjen8fQSv54">via GIPHY</a></p>
-
+<iframe src="https://giphy.com/embed/MWdOAxxPDEhNKyzXVK" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/ionedigital-yellow-quotes-MWdOAxxPDEhNKyzXVK">via GIPHY</a></p>
 ## INDEX
 
 + [ROLE](#ROLE)
