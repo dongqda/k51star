@@ -1,8 +1,8 @@
 # oilNav
  최적 주유소 길안내 서비스
 
-## 홍보영상
-![Semantic description of image](https://media.giphy.com/media/TGvDB94Bjen8fQSv54/giphy-downsized-large.gif "Image Title")
+## Video
+![Semantic description of image](https://media.giphy.com/media/cKWYYqUS9cVQaooIPQ/giphy-downsized-large.gif "Image Title")
 
 ## INDEX
 
