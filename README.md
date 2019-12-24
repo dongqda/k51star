@@ -2,7 +2,7 @@
  최적 주유소 길안내 서비스
 
 ## Video
-![Semantic description of image](https://media.giphy.com/media/cKWYYqUS9cVQaooIPQ/source.mov "link")
+![FullVideo](/md_pic/fullViedo.gif)
 
 ## INDEX
 
@@ -70,15 +70,9 @@
 
 ## III. 레이아웃-Layout
 
-![Semantic description of image](https://media.giphy.com/media/KbfQSXhj0HqNGuf3LX/source.gif "link")
-
-
-
-
-
+![layout](/md_pic/layout.gif)
 
 
 ## IV. 기능-Function
 
-![Semantic description of image](https://media.giphy.com/media/Lm5p5ZJHc6b7EeY2cI/source.mp4 "link")
-
+![function](/md_pic/function.gif)
