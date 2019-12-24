@@ -81,4 +81,4 @@
 
 ## V. 링크
 
-[oilodi.shop](http://pjtoilodi.herokuapp.com/)
+[oilodi.shop](http://pjtoilodi.herokuapp.com/){: target="_blank"}
