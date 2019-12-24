@@ -2,7 +2,7 @@
  최적 주유소 길안내 서비스
 
 ## Video
-![FullVideo](/md_pic/fullViedo.gif)
+![FullVideo](/md_pic/fullVideo.gif)
 
 ## INDEX
 
@@ -76,3 +76,9 @@
 ## IV. 기능-Function
 
 ![function](/md_pic/function.gif)
+
+
+
+## V. 링크
+
+[OILODI 홈페이지](#oilodi.shop)
