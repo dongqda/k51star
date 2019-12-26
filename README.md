@@ -2,8 +2,9 @@
  최적 주유소 길안내 서비스 
 
 ## Video
-![FullVideo](/md_pic/fullVideo.gif)
 [유튜브링크](https://www.youtube.com/watch?v=gGkLFVYjUiE)
+![FullVideo](/md_pic/fullVideo.gif)
+
 
 ## INDEX
 
@@ -90,7 +91,7 @@
 ## IV. 기능-Function
 
 ![function](/md_pic/function.gif)
-
+###### 3초뒤 영상이 시작됩니다.
 
 
 ##### 1. 주유소 추천
