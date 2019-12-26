@@ -3,6 +3,7 @@
 
 ## Video
 [유튜브링크](https://www.youtube.com/watch?v=gGkLFVYjUiE)
+
 ![FullVideo](/md_pic/fullVideo.gif)
 
 
@@ -90,8 +91,10 @@
 
 ## IV. 기능-Function
 
-![function](/md_pic/function.gif)
 ###### 3초뒤 영상이 시작됩니다.
+
+![function](/md_pic/function.gif)
+
 
 
 ##### 1. 주유소 추천
