@@ -1,5 +1,5 @@
-# [OILODI(오일오디)](oilodi.shop)
- 최적 주유소 길안내 서비스
+# OILODI(오일오디) → 링크 : [oilodi.shop](http://pjtoilodi.herokuapp.com/)
+ 최적 주유소 길안내 서비스 
 
 ## Video
 ![FullVideo](/md_pic/fullVideo.gif)
